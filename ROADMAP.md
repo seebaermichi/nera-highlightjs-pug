@@ -1,0 +1,130 @@
+# ROADMAP — `@nera-static/highlightjs-pug`
+
+A [Pug](https://pugjs.org) grammar for [highlight.js](https://highlightjs.org), published as a 3rd-party language package. Usable with any highlight.js setup; `@nera-static/plugin-code-blocks` registers it by default, so Nera sites get Pug highlighting with zero config.
+
+**This file is the single source of truth for this package. Extend it; never start a parallel document.** Why the package exists and why it has this name is decided in `../nera-plugin-code-blocks/ROADMAP.md` (D12); do not repeat that discussion here, refer to it. Each slice below is sized for one session, worked in a session started in **this** folder. Tick the checkboxes and add a dated `**Done YYYY-MM-DD**` note with anything learned. The next session reads this file first and continues where the last one stopped.
+
+Written 2026-10-09. The repository starts with this file as its first commit; no `package.json` and no code yet.
+
+---
+
+## The problem
+
+highlight.js has no Pug grammar, neither in core nor in its 3rd-party list, and no longer merges new languages into core (code-blocks ROADMAP, D12). The only npm package, `highlightjs-pug` 0.0.2, is a stripped HAML copy that highlights `.class` and `#id` only. Nera templates are Pug, and nera.js.org alone has 24 ```` ```pug ```` blocks.
+
+## The goal
+
+```js
+import hljs from 'highlight.js/lib/core'
+import pug from '@nera-static/highlightjs-pug'
+
+hljs.registerLanguage('pug', pug)
+hljs.highlight('a.btn(href=url) #{ label }', { language: 'pug' }).value
+```
+
+highlights tag, class, attribute name, JavaScript value and interpolation, with highlight.js's standard scopes, so every existing highlight.js theme colors it without extra CSS.
+
+---
+
+## Verified facts (2026-10-09)
+
+- **highlight.js 11.12.0** is current. A language is a function `(hljs) => definition`, registered with `hljs.registerLanguage(name, fn)`. Sub-languages (`subLanguage: 'javascript'`) work when that language is registered too; `highlight.js` (full build) has `javascript`, `xml`, `css`, `markdown`.
+- **3rd-party quick start** (`extra/3RD_PARTY_QUICK_START.md` in highlight.js): grammar in `src/languages/<name>.js`, markup tests in `test/markup/<name>/`, `package.json`, LICENSE, README, and a `dist/` folder filled by `npm run build` (their template builds ESM, CJS and a CDN file with Rollup; `dist/` is committed). A CDN-style `dist/<name>.min.js` can also be built from a highlight.js clone with the grammar in its `extra/` folder (`npm run build-cdn`). Tests can run in their core suite with `ONLY_EXTRA=true npm run test-markup`. Repos must not live under the highlight.js organisation. Listing: a PR adding the package to `SUPPORTED_LANGUAGES.md`.
+- **No naming rule** in the quick start; its examples are `highlightjs-<language>`.
+- **`@nera-static/highlightjs-pug`** returned 404 on npm (free). It does not start with `@nera-static/plugin-`, so Nera core never loads it as a plugin.
+- **Fleet conventions** (workspace `CLAUDE.md`): ESM, Node ≥ 20, eslint with 4 spaces / no semicolons / single quotes, vitest, husky `pre-commit` lint and `pre-push` tests, CI `test.yml` + OIDC `publish.yml`, lockfile committed. The fleet has **no build step**; this package needs a small one for `dist/` (D3).
+
+---
+
+## Decisions
+
+### D1 — Package shape
+- `src/languages/pug.js`: the grammar, ESM, `export default function pug(hljs) { … }`.
+- `package.json` `exports`: `"."` → `./src/languages/pug.js` (Node and bundlers, no build needed), `"./dist/*"` → `./dist/*`.
+- `name: 'Pug'`, `aliases: ['jade']`, `case_insensitive: false`. Registered as `pug`.
+- `peerDependencies: { "highlight.js": "^11.0.0" }`; dev dependency on the same for tests. No runtime dependencies.
+
+### D2 — Scopes (so any highlight.js theme works)
+
+| Pug | Example | Scope |
+| --- | --- | --- |
+| tag at line start | `header`, `a` | `name` (as in the XML grammar) |
+| class / id shorthand | `.container`, `#main` | `selector-class`, `selector-id` |
+| attribute name | `href=` | `attr` |
+| attribute value | `post.href`, `'nav--main'` | `subLanguage: javascript` |
+| keywords | `extends`, `block`, `append`, `prepend`, `include`, `mixin`, `if`, `else if`, `else`, `unless`, `each … in`, `for`, `while`, `case`, `when`, `default`, `yield` | `keyword` |
+| include / extends path | `../layouts/layout` | `string` |
+| mixin declaration / call | `mixin card(title)`, `+linkListNav(…)` | `title.function` |
+| code line | `- const x = 1` | `subLanguage: javascript` |
+| buffered output | `p= title`, `p!= html` | `=`/`!=` as `operator`, rest JavaScript |
+| interpolation | `#{ post.title }`, `!{ html }`, `#[em text]` | `subst`, JavaScript inside |
+| comments | `// visible`, `//- hidden` | `comment` |
+| doctype | `doctype html` | `meta` |
+| piped text | `\| text` | `\|` as `punctuation`, text plain |
+| filters | `:markdown-it` | `meta` (body plain) |
+| block expansion | `li: a(href=x) Link` | `:` as `punctuation` |
+
+highlight.js matches patterns, not indentation. Multi-line text blocks after `tag.`, filter bodies and multi-line comments are therefore only partly covered: the first line is right, indented continuation lines may be read as tags. Document this in the README; do not try to emulate indentation.
+
+### D3 — `dist/` and the build
+- Node and bundler users use `src/` directly (D1). `dist/` is for the browser: `dist/pug.min.js` (registers itself on a global `hljs`, as highlight.js's CDN builds do) and `dist/pug.es.min.js`.
+- Built with a small dev-only script (Rollup or esbuild + terser, decide in slice 3), `npm run build`, output committed as the quick start asks. CI checks that `dist/` is up to date.
+- If the build turns out to be more than a few lines, ship 1.0.0 with `src/` only and add `dist/` in a minor; decide with the user.
+
+### D4 — Tests
+- Markup fixtures in highlight.js's format: `test/markup/pug/<case>.txt` (input) + `<case>.expect.txt` (expected HTML). A vitest test reads every pair, highlights with the full `highlight.js` build plus this grammar, and compares.
+- Cases from real code: the ```` ```pug ```` blocks in `../nera-website/pages` (en version; de/es are the same code) and `../../nera-websites/michael-becker-berlin.de/themes/technical/views/`. Plus targeted cases per D2 row, and the D2 limits (text block, filter) to pin current behaviour.
+- `hljs.highlightAuto` must not pick Pug for plain prose or other languages: keep `relevance` low on generic patterns (tags, classes) and give `extends`/`block`/`mixin`/`#{…}` the weight. One test with a few non-Pug samples.
+- Optional, before the listing PR: run the fixtures in highlight.js's own suite (`ONLY_EXTRA=true npm run test-markup` from a clone).
+
+---
+
+## Slices
+
+Each slice ends with `npx vitest run && npm run lint` green, the checkboxes ticked, a dated note, and a commit on `main`. Nothing is published before slice 4.
+
+### Slice 0 — Repository scaffold
+- [ ] `package.json` per D1 (`0.0.0`, `"type": "module"`, `engines.node >=20`, `files: ["src", "dist", "CHANGELOG.md"]`, `publishConfig.access: public`, `repository` → `seebaermichi/nera-highlightjs-pug`, keywords `highlight.js`, `highlightjs`, `pug`, `jade`, `syntax-highlighting`), `LICENSE` (MIT, 2026), `CHANGELOG.md` (`## [Unreleased]`), `README.md` stub.
+- [ ] Copy `eslint.config.js`, `.gitignore`, `.github/workflows/test.yml` and `publish.yml`, `.husky/` plus `prepare: husky` from `../nera-plugin-images`. In `test.yml`, drop the cheerio comment; check whether Node 18 can come back into the matrix (no cheerio here).
+- [ ] Dev: `highlight.js`, `vitest`, `eslint`, `husky`. `npm install` with npm ≥ 10.9 (Node 22), lockfile in the scaffold commit, before any workflow that runs `npm ci` (workspace `CLAUDE.md`, ordering rule 1).
+- [ ] Fixture runner (D4) with one trivial case, so slice 1 only adds cases.
+- [ ] Do **not** create the GitHub repo yet.
+
+### Slice 1 — Core grammar
+- [ ] Tags, class/id shorthand, attributes with JavaScript values (incl. multi-line attribute lists), keywords, include/extends paths, mixins, comments, doctype, piped text, block expansion (D2).
+- [ ] Fixtures for each, then all real snippets from nera.js.org.
+
+### Slice 2 — JavaScript and interpolation
+- [ ] `-` code lines, `=`/`!=` output, `#{}`/`!{}`/`#[]` interpolation in text and attribute strings, filters as `meta`.
+- [ ] Fixtures from the field-test site's `themes/technical/views/` (layouts, mixins, components). Write the D2 limits down as fixtures.
+- [ ] `highlightAuto` test (D4).
+
+### Slice 3 — `dist/` and README
+- [ ] Build per D3, CI check that `dist/` matches.
+- [ ] README: install, Node/ESM use, browser/CDN use, the scope table, the limits, link to nera.js.org and to `@nera-static/plugin-code-blocks`.
+- [ ] Field check: install the packed tarball into the code-blocks plugin (or the field-test site's local plugin) and look at the Pug blocks of nera.js.org in the browser with a common highlight.js theme.
+
+### Slice 4 — Release and listing
+Follow `../nera-plugin-images/ROADMAP.md` slice 8, **confirming every outward step with the user**:
+- [ ] GitHub repo `seebaermichi/nera-highlightjs-pug` (public), push, private vulnerability reporting, `protect-main` ruleset, secret-scanning push protection, Dependabot config (fleet copy).
+- [ ] 1.0.0 bootstrap publish by hand (the user runs `npm publish`), Trusted Publisher, then a real **1.0.1 via CI within two days** so the Trusted Publisher validates.
+- [ ] PR to `highlightjs/highlight.js` adding the package to `SUPPORTED_LANGUAGES.md` (row format as the existing 3rd-party entries). Wait for the user's go before opening it.
+- [ ] Not a Nera plugin, so **not** in `generator/PLUGINS.md` or the nera.js.org plugin catalog. Mention it in the code-blocks README instead.
+- [ ] Code-blocks ROADMAP slice 4: tick the Pug item, add the dependency there.
+- [ ] Workspace `CLAUDE.md`: add the folder to the workspace layout and to the non-plugin members of the `@nera-static` scope.
+
+---
+
+## Semver notes
+**Major:** a scope from D2 changes for an existing construct (themes and sites style these), the registered name or aliases change, or the `exports` paths change. **Minor:** a new construct is highlighted, `dist/` is added. **Patch:** a wrong highlight is fixed. Note in the CHANGELOG when highlighting of existing snippets visibly changes.
+
+## Not in scope
+- Indentation-aware parsing (D2 limits).
+- Highlighting filter bodies in their own language (`:markdown-it` content as Markdown).
+- A Shiki/TextMate grammar.
+
+## Acceptance criteria
+1. Every ```` ```pug ```` block on nera.js.org and every view in the field-test site's theme highlights without visibly wrong tokens on their first lines; known limits are covered by fixtures and the README.
+2. Works with the full `highlight.js` build and with `highlight.js/lib/core` plus `javascript` registered.
+3. `highlightAuto` does not choose Pug for the non-Pug samples.
+4. Listed in highlight.js's `SUPPORTED_LANGUAGES.md`.
