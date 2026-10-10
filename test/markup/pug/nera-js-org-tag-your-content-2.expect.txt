@@ -1,0 +1,2 @@
+<span class="hljs-keyword">if</span> <span class="language-javascript">app.<span class="hljs-property">tagCloud</span></span>
+  <span class="hljs-keyword">include</span> <span class="hljs-string">../vendor/plugin-tags/partials/tag-cloud</span>

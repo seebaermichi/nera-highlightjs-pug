@@ -1,0 +1,2 @@
+<span class="hljs-name">head</span>
+  <span class="hljs-keyword">include</span> <span class="hljs-string">../vendor/plugin-canonical-links/index</span>

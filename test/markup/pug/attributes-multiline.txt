@@ -1,0 +1,6 @@
+img(
+  src=reference.image,
+  alt=reference.image_alt
+  loading="lazy"
+)
+p after the list

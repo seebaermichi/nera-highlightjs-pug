@@ -1,0 +1,2 @@
+<span class="hljs-meta">doctype html</span>
+<span class="hljs-name">html</span>(<span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>)

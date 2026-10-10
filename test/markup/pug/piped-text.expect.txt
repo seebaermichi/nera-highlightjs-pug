@@ -1,0 +1,4 @@
+<span class="hljs-name">p</span>
+  <span class="hljs-punctuation">|</span> Plain text
+  <span class="hljs-punctuation">|</span> with <span class="hljs-subst">#{<span class="language-javascript"> name </span>}</span> inside
+<span class="hljs-punctuation">|</span>

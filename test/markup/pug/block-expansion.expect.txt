@@ -1,0 +1,2 @@
+<span class="hljs-name">li</span><span class="hljs-punctuation">:</span> <span class="hljs-name">a</span>(<span class="hljs-attr">href</span>=<span class="language-javascript">x</span>) Link
+<span class="hljs-name">ul</span><span class="hljs-punctuation">:</span> <span class="hljs-name">li</span><span class="hljs-selector-class">.item</span><span class="hljs-punctuation">:</span> <span class="hljs-name">span</span> Deep

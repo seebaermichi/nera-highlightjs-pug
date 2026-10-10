@@ -1,0 +1,9 @@
+a(href=post.href, class='nav--main') Link
+a(href="#contact") Contact
+input(type="checkbox", checked)
+meta(name="generator" content="Nera")
+.v(class=item.small ? 'sm' : undefined) value
+time(datetime=new Date(post.createdAt).toISOString().slice(0, 10))
+div(data-json={ a: 1, b: [1, 2] })
+p(class!=raw) unescaped
+a(href=`/${ lang }/`) Home

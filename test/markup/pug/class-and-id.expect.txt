@@ -1,0 +1,5 @@
+<span class="hljs-selector-class">.container</span>
+<span class="hljs-selector-id">#main</span>
+<span class="hljs-name">section</span><span class="hljs-selector-class">.hero</span><span class="hljs-selector-id">#home</span>
+<span class="hljs-name">a</span><span class="hljs-selector-class">.btn</span><span class="hljs-selector-class">.ghost</span>
+<span class="hljs-name">div</span><span class="hljs-selector-id">#app</span><span class="hljs-selector-class">.wrap</span>

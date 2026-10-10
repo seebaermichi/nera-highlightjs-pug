@@ -1,0 +1,1 @@
+a.site-header__cta(href=app.repo_url, target="_blank", rel="noopener noreferrer") GitHub

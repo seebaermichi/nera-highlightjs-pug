@@ -1,0 +1,5 @@
+<span class="hljs-keyword">extends</span> <span class="hljs-string">../layouts/layout</span>
+
+<span class="hljs-keyword">block</span> content
+  <span class="hljs-selector-class">.container</span>
+    <span class="hljs-keyword">include</span> <span class="hljs-string">../vendor/plugin-tags/pages/tag-overview</span>

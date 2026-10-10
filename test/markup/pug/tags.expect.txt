@@ -1,0 +1,7 @@
+<span class="hljs-name">header</span>
+  <span class="hljs-name">nav</span>
+    <span class="hljs-name">ul</span>
+      <span class="hljs-name">li</span> text after a tag
+<span class="hljs-name">svg:path</span>
+<span class="hljs-name">case-study</span>
+<span class="hljs-name">custom-element</span><span class="hljs-selector-class">.big</span>

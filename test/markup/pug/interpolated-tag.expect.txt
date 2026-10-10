@@ -1,0 +1,1 @@
+<span class="hljs-subst">#{<span class="language-javascript"> tag </span>}</span><span class="hljs-selector-class">.card</span>(<span class="hljs-attr">href</span>=<span class="language-javascript">reference.<span class="hljs-property">link</span></span>) Text

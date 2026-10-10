@@ -1,0 +1,21 @@
+if user
+  p Hello
+else if guest
+  p Guest
+else
+  p Who?
+unless loggedIn
+  p Log in
+each post in posts
+  p= post.title
+each item, i in list
+  p item
+for value in [1, 2, 3]
+  p= value
+while n < 4
+  p= n++
+case kind
+  when 'a'
+    p A
+  default
+    p Other

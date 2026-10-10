@@ -1,0 +1,13 @@
+extends ../layouts/layout
+
+block content
+  p Hello
+
+block append scripts
+  script(src="/a.js")
+
+append head
+  meta(name="x")
+
+prepend head
+  meta(name="y")

@@ -1,0 +1,13 @@
+<span class="hljs-keyword">extends</span> <span class="hljs-string">../layouts/layout</span>
+
+<span class="hljs-keyword">block</span> content
+  <span class="hljs-name">p</span> Hello
+
+<span class="hljs-keyword">block append</span> scripts
+  <span class="hljs-name">script</span>(<span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/a.js&quot;</span>)
+
+<span class="hljs-keyword">append</span> head
+  <span class="hljs-name">meta</span>(<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;x&quot;</span>)
+
+<span class="hljs-keyword">prepend</span> head
+  <span class="hljs-name">meta</span>(<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;y&quot;</span>)

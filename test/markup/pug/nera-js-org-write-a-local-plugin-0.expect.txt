@@ -1,0 +1,7 @@
+<span class="hljs-keyword">if</span> <span class="language-javascript">app.<span class="hljs-property">tutorials</span> &amp;&amp; app.<span class="hljs-property">tutorials</span>.<span class="hljs-property">length</span></span>
+  <span class="hljs-name">ul</span><span class="hljs-selector-class">.tutorials__list</span>
+    <span class="hljs-keyword">each</span> post <span class="hljs-keyword">in</span> <span class="language-javascript">app.<span class="hljs-property">tutorials</span></span>
+      <span class="hljs-name">li</span><span class="hljs-selector-class">.tutorials__item</span>
+        <span class="hljs-name">a</span><span class="hljs-selector-class">.tutorials__link</span>(<span class="hljs-attr">href</span>=<span class="language-javascript">post.<span class="hljs-property">href</span></span>)
+          <span class="hljs-name">h2</span> <span class="hljs-subst">#{<span class="language-javascript"> post.<span class="hljs-property">title</span> </span>}</span>
+          <span class="hljs-name">p</span> <span class="hljs-subst">#{<span class="language-javascript"> post.<span class="hljs-property">description</span> </span>}</span>

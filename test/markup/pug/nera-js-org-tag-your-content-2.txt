@@ -1,0 +1,2 @@
+if app.tagCloud
+  include ../vendor/plugin-tags/partials/tag-cloud

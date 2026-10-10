@@ -1,0 +1,12 @@
+<span class="hljs-keyword">mixin</span> <span class="hljs-title function_">card</span>(<span class="hljs-params">title, ...items</span>)
+  <span class="hljs-selector-class">.card</span>
+    <span class="hljs-name">h3</span>= title
+    <span class="hljs-keyword">block</span>
+
+<span class="hljs-keyword">mixin</span> <span class="hljs-title function_">arrow</span>
+  <span class="hljs-name">svg</span>
+
+<span class="hljs-title function_">+card</span>(<span class="hljs-string">&#x27;Hello&#x27;</span><span class="language-javascript">, <span class="hljs-number">1</span>, <span class="hljs-number">2</span></span>)
+<span class="hljs-title function_">+arrow</span>
+<span class="hljs-title function_">+link</span>(<span class="language-javascript">href</span>)(<span class="hljs-attr">class</span>=<span class="hljs-string">&quot;external&quot;</span>) Text
+<span class="hljs-title function_">+secTab</span>(<span class="language-javascript">tx.<span class="hljs-property">sections</span>.<span class="hljs-property">about</span>.<span class="hljs-property">tab</span>, tx.<span class="hljs-property">sections</span>.<span class="hljs-property">about</span>.<span class="hljs-property">code</span></span>)

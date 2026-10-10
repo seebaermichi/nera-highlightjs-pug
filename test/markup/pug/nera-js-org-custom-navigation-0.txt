@@ -1,0 +1,5 @@
+include ../vendor/plugin-navigation/partials/link-list-navigation
+
+header.site-header
+  if app.nav && app.nav.main
+    +linkListNav(app.nav.main.elements, 'nav--main')

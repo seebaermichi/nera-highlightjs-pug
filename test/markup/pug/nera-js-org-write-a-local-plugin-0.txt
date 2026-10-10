@@ -1,0 +1,7 @@
+if app.tutorials && app.tutorials.length
+  ul.tutorials__list
+    each post in app.tutorials
+      li.tutorials__item
+        a.tutorials__link(href=post.href)
+          h2 #{ post.title }
+          p #{ post.description }

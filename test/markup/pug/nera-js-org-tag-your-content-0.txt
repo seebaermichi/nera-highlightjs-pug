@@ -1,0 +1,5 @@
+extends ../layouts/layout
+
+block content
+  .container
+    include ../vendor/plugin-tags/pages/tag-overview

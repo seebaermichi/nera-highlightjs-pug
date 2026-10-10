@@ -55,6 +55,10 @@ highlights tag, class, attribute name, JavaScript value and interpolation, with 
 | keywords | `extends`, `block`, `append`, `prepend`, `include`, `mixin`, `if`, `else if`, `else`, `unless`, `each … in`, `for`, `while`, `case`, `when`, `default`, `yield` | `keyword` |
 | include / extends path | `../layouts/layout` | `string` |
 | mixin declaration / call | `mixin card(title)`, `+linkListNav(…)` | `title.function` |
+| mixin parameters (added slice 1) | `(title, ...items)` in a declaration | `params` (as JavaScript's grammar) |
+| mixin arguments (added slice 1) | `+card('Hello', 1)` | `subLanguage: javascript` |
+| `&attributes` (added slice 1) | `div&attributes(obj)` | `keyword`, argument JavaScript |
+| interpolated tag name (added slice 1) | `#{ tag }.card` | `subst`, as interpolation |
 | code line | `- const x = 1` | `subLanguage: javascript` |
 | buffered output | `p= title`, `p!= html` | `=`/`!=` as `operator`, rest JavaScript |
 | interpolation | `#{ post.title }`, `!{ html }`, `#[em text]` | `subst`, JavaScript inside |
@@ -97,8 +101,15 @@ Each slice ends with `npx vitest run && npm run lint` green, the checkboxes tick
 - `npm install -D` does not run `prepare`; run `npm run prepare` once so `core.hooksPath` points at `.husky/_`.
 
 ### Slice 1 — Core grammar
-- [ ] Tags, class/id shorthand, attributes with JavaScript values (incl. multi-line attribute lists), keywords, include/extends paths, mixins, comments, doctype, piped text, block expansion (D2).
-- [ ] Fixtures for each, then all real snippets from nera.js.org.
+- [x] Tags, class/id shorthand, attributes with JavaScript values (incl. multi-line attribute lists), keywords, include/extends paths, mixins, comments, doctype, piped text, block expansion (D2).
+- [x] Fixtures for each, then all real snippets from nera.js.org.
+
+**Done 2026-10-10.** 21 fixtures: one per D2 row (tags, class/id, attributes incl. multi-line, space-separated and `!=`, keywords, blocks, include, mixins, comments, doctype, piped text, block expansion, `&attributes`, interpolated tag name) plus all 8 English nera.js.org blocks (`nera-js-org-*`; de/es carry the same code). Interpolation in text already works, since the tag line needed it; slice 2 adds its edge cases. Learned:
+- **Never match `\s` inside a line mode.** Contained modes win over the parent's `end` at the same position, so a `\s+` swallows the newline before `$` can end the line, and the next line is never classified. Line-level whitespace is `[ \t]`; only the attribute list (which may span lines) uses `\s`.
+- **A sub-language mode adds no relevance of its own** (`core.js`: `if (!top.skip && !top.subLanguage) relevance += top.relevance`); its `relevance` only gates whether JavaScript's relevance is added. So keyword lines are a `match` carrying the weight, which `starts` a `relevance: 0` JavaScript mode for the rest of the line.
+- Attribute values are JavaScript with nested `()`, `[]`, `{}` and strings as contained modes, so a `,` or `)` inside them does not end the value. highlight.js highlights each fragment separately; the result looks right but carries several `language-javascript` spans, and a regex literal with parentheses splits across them (cosmetic). Interpolation only nests `{}` and strings, which keeps `#{ t('x') }` in one fragment.
+- A value ends at a top-level `,` or `)`, or where whitespace is followed by `name=`. A space-separated **boolean** attribute after a value (`a(href=x disabled)`) is therefore read as part of the value; with commas (the common style) it is an `attr`. Ternaries such as `class=a ? 'b' : undefined` stay one value.
+- `//` is a comment only at line start; `span.t // Blog` is text, as in Pug.
 
 ### Slice 2 — JavaScript and interpolation
 - [ ] `-` code lines, `=`/`!=` output, `#{}`/`!{}`/`#[]` interpolation in text and attribute strings, filters as `meta`.

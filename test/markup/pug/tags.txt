@@ -1,0 +1,7 @@
+header
+  nav
+    ul
+      li text after a tag
+svg:path
+case-study
+custom-element.big

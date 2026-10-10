@@ -1,0 +1,4 @@
+p
+  | Plain text
+  | with #{ name } inside
+|

@@ -1,0 +1,2 @@
+div#foo(data-bar="foo")&attributes({ 'data-foo': 'bar' })
+a(href='/')&attributes(attributes) Home

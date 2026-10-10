@@ -1,0 +1,4 @@
+<span class="hljs-comment">// visible in the HTML</span>
+<span class="hljs-comment">//- hidden from the HTML</span>
+    <span class="hljs-comment">//- indented comment</span>
+<span class="hljs-name">span</span><span class="hljs-selector-class">.t</span> // Blog

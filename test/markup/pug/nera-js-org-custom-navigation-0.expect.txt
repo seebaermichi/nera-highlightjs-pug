@@ -1,0 +1,5 @@
+<span class="hljs-keyword">include</span> <span class="hljs-string">../vendor/plugin-navigation/partials/link-list-navigation</span>
+
+<span class="hljs-name">header</span><span class="hljs-selector-class">.site-header</span>
+  <span class="hljs-keyword">if</span> <span class="language-javascript">app.<span class="hljs-property">nav</span> &amp;&amp; app.<span class="hljs-property">nav</span>.<span class="hljs-property">main</span></span>
+    <span class="hljs-title function_">+linkListNav</span>(<span class="language-javascript">app.<span class="hljs-property">nav</span>.<span class="hljs-property">main</span>.<span class="hljs-property">elements</span>, </span><span class="hljs-string">&#x27;nav--main&#x27;</span>)

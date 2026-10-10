@@ -1,0 +1,2 @@
+<span class="hljs-keyword">if</span> <span class="language-javascript">meta.<span class="hljs-property">tagLinks</span></span>
+  <span class="hljs-keyword">include</span> <span class="hljs-string">../vendor/plugin-tags/partials/tag-links</span>

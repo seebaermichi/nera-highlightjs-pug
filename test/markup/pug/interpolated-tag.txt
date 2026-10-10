@@ -1,0 +1,1 @@
+#{ tag }.card(href=reference.link) Text

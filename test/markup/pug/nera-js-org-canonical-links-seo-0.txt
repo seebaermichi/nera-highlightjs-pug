@@ -1,0 +1,2 @@
+head
+  include ../vendor/plugin-canonical-links/index

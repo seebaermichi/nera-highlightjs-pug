@@ -1,0 +1,12 @@
+mixin card(title, ...items)
+  .card
+    h3= title
+    block
+
+mixin arrow
+  svg
+
++card('Hello', 1, 2)
++arrow
++link(href)(class="external") Text
++secTab(tx.sections.about.tab, tx.sections.about.code)

@@ -1,0 +1,2 @@
+<span class="hljs-keyword">if</span> <span class="language-javascript">meta.<span class="hljs-property">pagePagination</span> &amp;&amp; (meta.<span class="hljs-property">pagePagination</span>.<span class="hljs-property">previous</span> || meta.<span class="hljs-property">pagePagination</span>.<span class="hljs-property">next</span>)</span>
+  <span class="hljs-keyword">include</span> <span class="hljs-string">../vendor/plugin-page-pagination/page-pagination</span>

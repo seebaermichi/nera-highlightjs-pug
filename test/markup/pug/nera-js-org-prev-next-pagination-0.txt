@@ -1,0 +1,2 @@
+if meta.pagePagination && (meta.pagePagination.previous || meta.pagePagination.next)
+  include ../vendor/plugin-page-pagination/page-pagination
