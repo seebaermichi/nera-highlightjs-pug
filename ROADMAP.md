@@ -136,7 +136,7 @@ Each slice ends with `npx vitest run && npm run lint` green, the checkboxes tick
 
 ### Slice 4 — Release and listing
 Follow `../nera-plugin-images/ROADMAP.md` slice 8, **confirming every outward step with the user**:
-- [ ] GitHub repo `seebaermichi/nera-highlightjs-pug` (public), push, private vulnerability reporting, `protect-main` ruleset, secret-scanning push protection, Dependabot config (fleet copy).
+- [x] GitHub repo `seebaermichi/nera-highlightjs-pug` (public), push, private vulnerability reporting, `protect-main` ruleset, secret-scanning push protection, Dependabot config (fleet copy). **Done 2026-10-10**, confirmed by the user (`gh repo create --public` is refused by Claude Code's auto-mode classifier until the user confirms in chat). Homepage nera.js.org. Enabled via `gh api` and verified: private vulnerability reporting, Dependabot alerts + automated security fixes, secret scanning + push protection, `protect-main` (`non_fast_forward` + `deletion`, `~DEFAULT_BRANCH`, no bypass; copied from plugin-images). `test.yml` green on Node 20 and 22, including the `dist/` check.
 - [ ] 1.0.0 bootstrap publish by hand (the user runs `npm publish`), Trusted Publisher, then a real **1.0.1 via CI within two days** so the Trusted Publisher validates.
 - [ ] PR to `highlightjs/highlight.js` adding the package to `SUPPORTED_LANGUAGES.md` (row format as the existing 3rd-party entries). Wait for the user's go before opening it.
 - [ ] Not a Nera plugin, so **not** in `generator/PLUGINS.md` or the nera.js.org plugin catalog. Mention it in the code-blocks README instead.
