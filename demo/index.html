@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pug Highlighting Demo</title>
+<meta name="description" content="How @nera-static/highlightjs-pug highlights Pug templates in stock highlight.js themes.">
+<link rel="stylesheet" href="themes.css">
+<style>
+@font-face { font-family: "IBM Plex Sans"; font-weight: 400; font-display: swap; src: url("fonts/IBMPlexSans-Regular.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 500; font-display: swap; src: url("fonts/IBMPlexSans-Medium.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 600; font-display: swap; src: url("fonts/IBMPlexSans-SemiBold.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; font-display: swap; src: url("fonts/IBMPlexMono-Regular.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-display: swap; src: url("fonts/IBMPlexMono-Medium.woff2") format("woff2"); }
+
+/* Layout: one reading column; code samples full column width; controls in a sticky bar. Palette after nera.js.org (IBM Plex, amber). */
+:root {
+  --bg: #fbfaf7; --surface: #ffffff; --fg: #23211c; --muted: #6b665b; --line: #e4dfd3; --accent: #b86e00;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #16150f; --surface: #1d1c16; --fg: #ece8de; --muted: #a39d8f; --line: #34312a; --accent: #f0a63a; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #16150f; --surface: #1d1c16; --fg: #ece8de; --muted: #a39d8f; --line: #34312a; --accent: #f0a63a; color-scheme: dark }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--sans); }
+.wrap { max-width: 920px; margin: 0 auto; padding-inline: 20px; padding-block: 32px 64px; display: grid; gap: 40px; }
+header.top h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 8px; text-wrap: balance; font-weight: 600; }
+header.top p { margin: 0; max-width: 65ch; color: var(--muted); }
+header.top code, .lede code, td code { font-family: var(--mono); font-size: .9em; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2; background: var(--bg); border-bottom: 1px solid var(--line);
+  display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; padding-block: 10px; font-size: .9rem; }
+.bar label { display: flex; gap: 8px; align-items: center; color: var(--muted); }
+.bar select { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; }
+.bar select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bar nav { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.bar nav a { color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--line); }
+.bar nav a:hover, .bar nav a:focus-visible { border-color: var(--accent); }
+section { display: grid; gap: 14px; min-width: 0; }
+h2 { font-size: 1.25rem; margin: 0; font-weight: 600; }
+h2::before { content: ""; display: inline-block; width: 10px; height: 10px; background: var(--accent); margin-right: 10px; vertical-align: 2px; }
+.lede { margin: 0; color: var(--muted); max-width: 65ch; }
+.sample { margin: 0; display: grid; gap: 6px; min-width: 0; }
+figcaption { font: 500 .78rem var(--mono); color: var(--muted); letter-spacing: .02em; }
+.scroll { overflow-x: auto; border-radius: 8px; border: 1px solid var(--line); }
+.scroll pre { margin: 0; }
+.scroll code.hljs, textarea { font: 14px/1.55 var(--mono); }
+.scroll code.hljs { display: block; padding: 16px 18px; white-space: pre; }
+[class^="hljs-"]:hover, [class*=" hljs-"]:hover { outline: 1px dashed currentColor; outline-offset: 1px; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+.tablewrap { overflow-x: auto; }
+td, th { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 500; color: var(--muted); font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; }
+td code.hljs { padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
+textarea { width: 100%; box-sizing: border-box; min-height: 9rem; resize: vertical; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+footer { color: var(--muted); font-size: .85rem; }
+footer a, .lede a { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+<header class="top">
+  <h1>Pug in highlight.js</h1>
+  <p><a href="https://www.npmjs.com/package/@nera-static/highlightjs-pug"><code>@nera-static/highlightjs-pug</code></a><span id="pkg-version"></span> on highlight.js <span id="hljs-version">11</span>, with no extra CSS: the colors come from a stock highlight.js theme. Hover a token to see its scope.</p>
+</header>
+<div class="bar">
+  <label for="theme">Theme <select id="theme"><option value="github">GitHub</option><option value="github-dark">GitHub Dark</option><option value="atom-one-dark">Atom One Dark</option></select></label>
+  <nav aria-label="Sections"><a href="#nera-js-org">nera.js.org</a><a href="#real-template">Real template</a><a href="#tour">Every construct</a><a href="#limits">Limits</a><a href="#scopes">Scopes</a><a href="#try">Try it</a></nav>
+</div>
+<section id="nera-js-org"><h2>From nera.js.org</h2><p class="lede">Three of the eight Pug blocks on the Nera website, unchanged.</p><figure class="sample"><figcaption>Custom navigation</figcaption><div class="scroll"><pre><code class="language-pug" id="b1">include ../vendor/plugin-navigation/partials/link-list-navigation
+
+header.site-header
+  if app.nav &amp;&amp; app.nav.main
+    +linkListNav(app.nav.main.elements, &#x27;nav--main&#x27;)</code></pre></div></figure><figure class="sample"><figcaption>A local plugin</figcaption><div class="scroll"><pre><code class="language-pug" id="b2">if app.tutorials &amp;&amp; app.tutorials.length
+  ul.tutorials__list
+    each post in app.tutorials
+      li.tutorials__item
+        a.tutorials__link(href=post.href)
+          h2 #{ post.title }
+          p #{ post.description }</code></pre></div></figure><figure class="sample"><figcaption>Tag pages</figcaption><div class="scroll"><pre><code class="language-pug" id="b3">extends ../layouts/layout
+
+block content
+  .container
+    include ../vendor/plugin-tags/pages/tag-overview</code></pre></div></figure></section><section id="real-template"><h2>A real template</h2><p class="lede">The header mixin of a production Nera theme: comments, code lines, attributes with JavaScript, conditionals, loops and interpolation.</p><figure class="sample"><figcaption>mixins/header.pug</figcaption><div class="scroll"><pre><code class="language-pug" id="b4">//- Sticky top bar. The home page gets the full section navigation, every other
+//- page (legal pages, blog posts, tag overviews) the &quot;back to home&quot; button.
+//- Navigation entries pointing at an index.html are the language switchers of
+//- config/navigation.yaml; they are rendered as the [DE] EN toggle instead.
+mixin header(lang, isHome)
+    - const tx = app.theme.config.text[lang]
+    - const homeHref = lang === app.lang ? &#x27;/&#x27; : `/${ lang }/`
+    - const elements = app.nav[&#x27;main_&#x27; + lang].elements
+    - const sectionLinks = elements.filter((item) =&gt; !item.href.includes(&#x27;index.html&#x27;))
+    - const langLinks = elements.filter((item) =&gt; item.href.includes(&#x27;index.html&#x27;))
+
+    header.nav(data-nav)
+        .nav-in
+            a.brand(href=`${ homeHref }#home`)
+                span.sq
+                | Michael Becker
+
+            if isHome
+                nav.links#main-nav(aria-label=tx.main_nav)
+                    each item in sectionLinks
+                        a(href=item.href.replace(/^\/(en\/)?/, &#x27;&#x27;), data-nav-link) #{ item.name }
+
+                .nav-right
+                    span.lang
+                        span [#{ lang.toUpperCase() }]
+                        each item in langLinks
+                            a(href=item.href, hreflang=item.name.toLowerCase(), lang=item.name.toLowerCase()) #{ item.name }
+                    a.btn.btn-contact(href=&quot;#contact&quot;) #{ tx.contact }
+                    button.nav-toggle(type=&quot;button&quot;, aria-controls=&quot;main-nav&quot;, aria-expanded=&quot;false&quot;, data-nav-toggle)
+                        span.nav-toggle-bars(aria-hidden=&quot;true&quot;)
+                        span.sr-only Menu
+            else
+                a.back(href=`${ homeHref }#home`) #{ tx.back_home }</code></pre></div></figure></section><section id="tour"><h2>Every construct</h2><p class="lede">One template that touches each construct the grammar knows.</p><figure class="sample"><figcaption>tour.pug</figcaption><div class="scroll"><pre><code class="language-pug" id="b5">doctype html
+//- A Pug comment, kept out of the HTML
+// A comment that ends up in the HTML
+html(lang=&quot;en&quot;)
+  head
+    title= pageTitle
+    include ../partials/head
+  body.home#top(data-page=slug)
+    - const posts = app.posts.filter((post) =&gt; post.published)
+    +header(lang, isHome)
+    if posts.length &gt; 0
+      ul.posts
+        each post, i in posts
+          li: a(href=post.href, class=i === 0 ? &#x27;first&#x27; : undefined) #{ post.title }
+    else
+      p.empty No posts yet. #[a(href=&quot;/new&quot;) Write one]
+    case kind
+      when &#x27;note&#x27;: p.note= text
+      default: p!= html
+    p
+      | Escaped: \#{ not interpolated }
+    :markdown-it(linkify)
+    &lt;hr class=&quot;divider&quot;&gt;
+
+mixin header(lang, isHome = false)
+  header.site-header&amp;attributes(attributes)
+    block</code></pre></div></figure></section><section id="limits"><h2>Known limits</h2><p class="lede">Indentation decides what these mean, and highlight.js does not track indentation. The README documents each one.</p><figure class="sample"><figcaption>limits.pug</figcaption><div class="scroll"><pre><code class="language-pug" id="b6">p.
+  A text block: highlight.js matches line by line,
+  so each continuation line starts like a tag.
+//-
+  A multi-line comment: only the marker line
+  is a comment.
+:markdown-it
+  Filter bodies are not highlighted as Markdown.
+a(href=x disabled) Space-separated boolean after a value</code></pre></div></figure></section>
+<section id="scopes"><h2>Scopes</h2><p class="lede">The grammar uses only standard highlight.js scopes, so every theme colors it. JavaScript inside attributes, code lines and interpolation is highlighted by highlight.js's own JavaScript grammar.</p>
+<div class="tablewrap"><table><thead><tr><th>Example</th><th>Scope</th><th>Pug</th></tr></thead><tbody><tr><td><code class="hljs"><span class="hljs-name">header</span></code></td><td><code>name</code></td><td>tag</td></tr><tr><td><code class="hljs"><span class="hljs-selector-class">.container</span></code></td><td><code>selector-class</code></td><td>class shorthand</td></tr><tr><td><code class="hljs"><span class="hljs-selector-id">#main</span></code></td><td><code>selector-id</code></td><td>id shorthand</td></tr><tr><td><code class="hljs"><span class="hljs-attr">href=</span></code></td><td><code>attr</code></td><td>attribute name</td></tr><tr><td><code class="hljs"><span class="hljs-keyword">extends</span></code></td><td><code>keyword</code></td><td>keyword</td></tr><tr><td><code class="hljs"><span class="hljs-string">../layouts/layout</span></code></td><td><code>string</code></td><td>path or string</td></tr><tr><td><code class="hljs"><span class="hljs-title function_">mixin card</span></code></td><td><code>title.function</code></td><td>mixin name</td></tr><tr><td><code class="hljs"><span class="hljs-params">(title</span></code></td><td><code>params</code></td><td>mixin parameters</td></tr><tr><td><code class="hljs"><span class="hljs-subst">#{ x }</span></code></td><td><code>subst</code></td><td>interpolation</td></tr><tr><td><code class="hljs"><span class="hljs-operator">=</span></code></td><td><code>operator</code></td><td>output and code markers</td></tr><tr><td><code class="hljs"><span class="hljs-punctuation">|</span></code></td><td><code>punctuation</code></td><td>pipe, block expansion</td></tr><tr><td><code class="hljs"><span class="hljs-comment">//</span></code></td><td><code>comment</code></td><td>comment</td></tr><tr><td><code class="hljs"><span class="hljs-meta">doctype html</span></code></td><td><code>meta</code></td><td>doctype, filter</td></tr></tbody></table></div></section>
+<section id="try"><h2>Try your own Pug</h2><p class="lede">Paste or type a template; it is highlighted as you type.</p>
+<label for="input" class="lede">Template</label>
+<textarea id="input" spellcheck="false">extends ../layouts/layout
+
+block content
+  h1.title #{ meta.title }
+  each item in app.nav.main.elements
+    a(href=item.href) #{ item.name }</textarea>
+<div class="sample"><div class="scroll"><pre><code class="hljs language-pug" id="output"></code></pre></div></div></section>
+<footer>Source and README: <a href="https://github.com/seebaermichi/nera-highlightjs-pug">github.com/seebaermichi/nera-highlightjs-pug</a>. This page runs the grammar from the repository's <code>main</code> branch. Built for <a href="https://nera.js.org">Nera</a>, whose templates are Pug.</footer>
+</div>
+<script src="demo.js"></script>
+</body>
+</html>

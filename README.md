@@ -13,6 +13,8 @@ block content
   +pagination(meta.pagination)
 ```
 
+🔍 **Live demo:** [seebaermichi.github.io/nera-highlightjs-pug/demo](https://seebaermichi.github.io/nera-highlightjs-pug/demo/): real templates in stock highlight.js themes, with the scope of each token on hover, and a box to try your own Pug.
+
 📖 Built for [Nera](https://nera.js.org), whose templates are Pug; the upcoming `@nera-static/plugin-code-blocks` registers it for Nera sites with no setup. It works the same with any highlight.js setup.
 
 ## 🚀 Installation
@@ -117,10 +119,10 @@ Two smaller ones: a space-separated boolean attribute after a value (`a(href=x d
 ```bash
 npx vitest run
 npm run lint
-npm run build   # rebuild dist/ after changing src/, and commit it
+npm run build   # rebuild dist/ and demo/demo.js after changing src/, and commit them
 ```
 
-The tests are markup fixtures in highlight.js's format: `test/markup/pug/<case>.txt` is the input, `<case>.expect.txt` the expected HTML. `WRITE_EXPECT=1 npx vitest run` rewrites the expect files from the current grammar; review that diff before committing it. CI fails when `dist/` was not rebuilt.
+The tests are markup fixtures in highlight.js's format: `test/markup/pug/<case>.txt` is the input, `<case>.expect.txt` the expected HTML. `WRITE_EXPECT=1 npx vitest run` rewrites the expect files from the current grammar; review that diff before committing it. CI fails when `dist/` or the demo was not rebuilt. The demo (`demo/`, served by GitHub Pages, not part of the npm package) bundles the grammar from `src/` with highlight.js and self-hosted fonts, so it loads nothing from third parties.
 
 ## 📦 License
 

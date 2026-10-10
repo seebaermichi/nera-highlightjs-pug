@@ -1,0 +1,48 @@
+.t-github pre code.hljs{display:block;overflow-x:auto;padding:1em}
+.t-github code.hljs{padding:3px 5px}
+.t-github .hljs{color:#24292e;background:#fff}
+.t-github .hljs-doctag,.t-github .hljs-keyword,.t-github .hljs-meta .hljs-keyword,.t-github .hljs-template-tag,.t-github .hljs-template-variable,.t-github .hljs-type,.t-github .hljs-variable.language_{color:#d73a49}
+.t-github .hljs-title,.t-github .hljs-title.class_,.t-github .hljs-title.class_.inherited__,.t-github .hljs-title.function_{color:#6f42c1}
+.t-github .hljs-attr,.t-github .hljs-attribute,.t-github .hljs-literal,.t-github .hljs-meta,.t-github .hljs-number,.t-github .hljs-operator,.t-github .hljs-selector-attr,.t-github .hljs-selector-class,.t-github .hljs-selector-id,.t-github .hljs-variable{color:#005cc5}
+.t-github .hljs-meta .hljs-string,.t-github .hljs-regexp,.t-github .hljs-string{color:#032f62}
+.t-github .hljs-built_in,.t-github .hljs-symbol{color:#e36209}
+.t-github .hljs-code,.t-github .hljs-comment,.t-github .hljs-formula{color:#6a737d}
+.t-github .hljs-name,.t-github .hljs-quote,.t-github .hljs-selector-pseudo,.t-github .hljs-selector-tag{color:#22863a}
+.t-github .hljs-subst{color:#24292e}
+.t-github .hljs-section{color:#005cc5;font-weight:700}
+.t-github .hljs-bullet{color:#735c0f}
+.t-github .hljs-emphasis{color:#24292e;font-style:italic}
+.t-github .hljs-strong{color:#24292e;font-weight:700}
+.t-github .hljs-addition{color:#22863a;background-color:#f0fff4}
+.t-github .hljs-deletion{color:#b31d28;background-color:#ffeef0}
+.t-github-dark pre code.hljs{display:block;overflow-x:auto;padding:1em}
+.t-github-dark code.hljs{padding:3px 5px}
+.t-github-dark .hljs{color:#c9d1d9;background:#0d1117}
+.t-github-dark .hljs-doctag,.t-github-dark .hljs-keyword,.t-github-dark .hljs-meta .hljs-keyword,.t-github-dark .hljs-template-tag,.t-github-dark .hljs-template-variable,.t-github-dark .hljs-type,.t-github-dark .hljs-variable.language_{color:#ff7b72}
+.t-github-dark .hljs-title,.t-github-dark .hljs-title.class_,.t-github-dark .hljs-title.class_.inherited__,.t-github-dark .hljs-title.function_{color:#d2a8ff}
+.t-github-dark .hljs-attr,.t-github-dark .hljs-attribute,.t-github-dark .hljs-literal,.t-github-dark .hljs-meta,.t-github-dark .hljs-number,.t-github-dark .hljs-operator,.t-github-dark .hljs-selector-attr,.t-github-dark .hljs-selector-class,.t-github-dark .hljs-selector-id,.t-github-dark .hljs-variable{color:#79c0ff}
+.t-github-dark .hljs-meta .hljs-string,.t-github-dark .hljs-regexp,.t-github-dark .hljs-string{color:#a5d6ff}
+.t-github-dark .hljs-built_in,.t-github-dark .hljs-symbol{color:#ffa657}
+.t-github-dark .hljs-code,.t-github-dark .hljs-comment,.t-github-dark .hljs-formula{color:#8b949e}
+.t-github-dark .hljs-name,.t-github-dark .hljs-quote,.t-github-dark .hljs-selector-pseudo,.t-github-dark .hljs-selector-tag{color:#7ee787}
+.t-github-dark .hljs-subst{color:#c9d1d9}
+.t-github-dark .hljs-section{color:#1f6feb;font-weight:700}
+.t-github-dark .hljs-bullet{color:#f2cc60}
+.t-github-dark .hljs-emphasis{color:#c9d1d9;font-style:italic}
+.t-github-dark .hljs-strong{color:#c9d1d9;font-weight:700}
+.t-github-dark .hljs-addition{color:#aff5b4;background-color:#033a16}
+.t-github-dark .hljs-deletion{color:#ffdcd7;background-color:#67060c}
+.t-atom-one-dark pre code.hljs{display:block;overflow-x:auto;padding:1em}
+.t-atom-one-dark code.hljs{padding:3px 5px}
+.t-atom-one-dark .hljs{color:#abb2bf;background:#282c34}
+.t-atom-one-dark .hljs-comment,.t-atom-one-dark .hljs-quote{color:#5c6370;font-style:italic}
+.t-atom-one-dark .hljs-doctag,.t-atom-one-dark .hljs-formula,.t-atom-one-dark .hljs-keyword{color:#c678dd}
+.t-atom-one-dark .hljs-deletion,.t-atom-one-dark .hljs-name,.t-atom-one-dark .hljs-section,.t-atom-one-dark .hljs-selector-tag,.t-atom-one-dark .hljs-subst{color:#e06c75}
+.t-atom-one-dark .hljs-literal{color:#56b6c2}
+.t-atom-one-dark .hljs-addition,.t-atom-one-dark .hljs-attribute,.t-atom-one-dark .hljs-meta .hljs-string,.t-atom-one-dark .hljs-regexp,.t-atom-one-dark .hljs-string{color:#98c379}
+.t-atom-one-dark .hljs-attr,.t-atom-one-dark .hljs-number,.t-atom-one-dark .hljs-selector-attr,.t-atom-one-dark .hljs-selector-class,.t-atom-one-dark .hljs-selector-pseudo,.t-atom-one-dark .hljs-template-variable,.t-atom-one-dark .hljs-type,.t-atom-one-dark .hljs-variable{color:#d19a66}
+.t-atom-one-dark .hljs-bullet,.t-atom-one-dark .hljs-link,.t-atom-one-dark .hljs-meta,.t-atom-one-dark .hljs-selector-id,.t-atom-one-dark .hljs-symbol,.t-atom-one-dark .hljs-title{color:#61aeee}
+.t-atom-one-dark .hljs-built_in,.t-atom-one-dark .hljs-class .hljs-title,.t-atom-one-dark .hljs-title.class_{color:#e6c07b}
+.t-atom-one-dark .hljs-emphasis{font-style:italic}
+.t-atom-one-dark .hljs-strong{font-weight:700}
+.t-atom-one-dark .hljs-link{text-decoration:underline}
