@@ -15,7 +15,7 @@ block content
 
 🔍 **Live demo:** [seebaermichi.github.io/nera-highlightjs-pug/demo](https://seebaermichi.github.io/nera-highlightjs-pug/demo/): real templates in stock highlight.js themes, with the scope of each token on hover, and a box to try your own Pug.
 
-📖 Built for [Nera](https://nera.js.org), whose templates are Pug; the upcoming `@nera-static/plugin-code-blocks` registers it for Nera sites with no setup. It works the same with any highlight.js setup.
+📖 Built for [Nera](https://nera.js.org), whose templates are Pug; [`@nera-static/plugin-code-blocks`](https://github.com/seebaermichi/nera-plugin-code-blocks) registers it for Nera sites with no setup. It works the same with any highlight.js setup.
 
 ## 🚀 Installation
 
