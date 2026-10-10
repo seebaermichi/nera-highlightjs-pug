@@ -1,0 +1,54 @@
+{
+    "name": "@nera-static/highlightjs-pug",
+    "version": "0.0.0",
+    "description": "Pug (formerly Jade) language grammar for highlight.js.",
+    "type": "module",
+    "main": "./src/languages/pug.js",
+    "exports": {
+        ".": "./src/languages/pug.js",
+        "./dist/*": "./dist/*"
+    },
+    "files": [
+        "src",
+        "dist",
+        "CHANGELOG.md"
+    ],
+    "scripts": {
+        "lint": "eslint .",
+        "test": "vitest",
+        "prepare": "husky"
+    },
+    "keywords": [
+        "highlight.js",
+        "highlightjs",
+        "pug",
+        "jade",
+        "syntax-highlighting"
+    ],
+    "author": "Michael Becker",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/seebaermichi/nera-highlightjs-pug"
+    },
+    "bugs": {
+        "url": "https://github.com/seebaermichi/nera-highlightjs-pug/issues"
+    },
+    "homepage": "https://github.com/seebaermichi/nera-highlightjs-pug#readme",
+    "publishConfig": {
+        "access": "public"
+    },
+    "peerDependencies": {
+        "highlight.js": "^11.0.0"
+    },
+    "engines": {
+        "node": ">=20"
+    },
+    "sideEffects": false,
+    "devDependencies": {
+        "eslint": "^10.12.0",
+        "highlight.js": "^11.12.0",
+        "husky": "^9.1.7",
+        "vitest": "^5.0.3"
+    }
+}

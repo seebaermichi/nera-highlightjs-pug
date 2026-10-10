@@ -84,11 +84,17 @@ highlight.js matches patterns, not indentation. Multi-line text blocks after `ta
 Each slice ends with `npx vitest run && npm run lint` green, the checkboxes ticked, a dated note, and a commit on `main`. Nothing is published before slice 4.
 
 ### Slice 0 — Repository scaffold
-- [ ] `package.json` per D1 (`0.0.0`, `"type": "module"`, `engines.node >=20`, `files: ["src", "dist", "CHANGELOG.md"]`, `publishConfig.access: public`, `repository` → `seebaermichi/nera-highlightjs-pug`, keywords `highlight.js`, `highlightjs`, `pug`, `jade`, `syntax-highlighting`), `LICENSE` (MIT, 2026), `CHANGELOG.md` (`## [Unreleased]`), `README.md` stub.
-- [ ] Copy `eslint.config.js`, `.gitignore`, `.github/workflows/test.yml` and `publish.yml`, `.husky/` plus `prepare: husky` from `../nera-plugin-images`. In `test.yml`, drop the cheerio comment; check whether Node 18 can come back into the matrix (no cheerio here).
-- [ ] Dev: `highlight.js`, `vitest`, `eslint`, `husky`. `npm install` with npm ≥ 10.9 (Node 22), lockfile in the scaffold commit, before any workflow that runs `npm ci` (workspace `CLAUDE.md`, ordering rule 1).
-- [ ] Fixture runner (D4) with one trivial case, so slice 1 only adds cases.
-- [ ] Do **not** create the GitHub repo yet.
+- [x] `package.json` per D1 (`0.0.0`, `"type": "module"`, `engines.node >=20`, `files: ["src", "dist", "CHANGELOG.md"]`, `publishConfig.access: public`, `repository` → `seebaermichi/nera-highlightjs-pug`, keywords `highlight.js`, `highlightjs`, `pug`, `jade`, `syntax-highlighting`), `LICENSE` (MIT, 2026), `CHANGELOG.md` (`## [Unreleased]`), `README.md` stub.
+- [x] Copy `eslint.config.js`, `.gitignore`, `.github/workflows/test.yml` and `publish.yml`, `.husky/` plus `prepare: husky` from `../nera-plugin-images`. In `test.yml`, drop the cheerio comment; check whether Node 18 can come back into the matrix (no cheerio here).
+- [x] Dev: `highlight.js`, `vitest`, `eslint`, `husky`. `npm install` with npm ≥ 10.9 (Node 22), lockfile in the scaffold commit, before any workflow that runs `npm ci` (workspace `CLAUDE.md`, ordering rule 1).
+- [x] Fixture runner (D4) with one trivial case, so slice 1 only adds cases.
+- [x] Do **not** create the GitHub repo yet.
+
+**Done 2026-10-10.** Scaffold, lockfile and a fixture runner (`test/markup.test.js`) with one case; the grammar is a stub that only knows tags. Learned:
+- **Node 18 cannot come back** into the CI matrix: vitest 5 declares `^22.12.0 || ^24 || >=26` and eslint 10 `^20.19.0 || …`. The fleet runs vitest 5 on Node 20 in CI anyway (works in practice, as `nera-plugin-images` shows), so the matrix stays `[20, 22]`. The grammar has no runtime dependencies and no Node floor of its own; `engines.node >=20` documents the tooling.
+- The fleet `.gitignore` ignores `dist/`; that block is removed here, since `dist/` is committed (D3).
+- The runner compares `hljs.highlight(input).value` with `<case>.expect.txt` after `trim()`, as highlight.js's own `test/markup` does. `WRITE_EXPECT=1 npx vitest run` writes the expect files from the current grammar; review that diff by eye, it is the actual test.
+- `npm install -D` does not run `prepare`; run `npm run prepare` once so `core.hooksPath` points at `.husky/_`.
 
 ### Slice 1 — Core grammar
 - [ ] Tags, class/id shorthand, attributes with JavaScript values (incl. multi-line attribute lists), keywords, include/extends paths, mixins, comments, doctype, piped text, block expansion (D2).
