@@ -1,0 +1,6 @@
+case friends
+  when 0: p you have no friends
+  when 1
+    p you have a friend
+  when { a: 1 }.a: p.x object
+  default: p you have #{ friends } friends

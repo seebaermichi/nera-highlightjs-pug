@@ -131,19 +131,33 @@ export default function pug(hljs) {
         ATTRIBUTES,
     ]
 
+    // `li: a(href=x)` — block expansion, another tag follows.
+    const BLOCK_EXPANSION = { match: [/:/, /[ \t]+/], scope: { 1: 'punctuation' }, relevance: 0 }
+
+    // A tag and what follows it on its line.
+    const TAG_REST = [
+        ...TAG_PARTS,
+        BLOCK_EXPANSION,
+        OUTPUT,
+        // `h3 #{ title }`: text that opens with an interpolation is typical
+        // of Pug; in Ruby or CoffeeScript, `#{` sits inside quotes.
+        { match: /[ \t]+(?=[#!]\{)/, relevance: 3, starts: TEXT },
+        { match: /[ \t]+/, relevance: 0, starts: TEXT },
+    ]
+
     const TAG_LINE = {
         begin: /^[ \t]*(?=[A-Za-z_.+]|#[\w{-])/,
         end: /$/,
         relevance: 0,
+        contains: TAG_REST,
+    }
+
+    // `when 1: p one`, `default: p none` — a case branch may end in block
+    // expansion. Its value ends at a `: ` outside brackets and strings.
+    const CASE_BRANCH = {
         contains: [
-            ...TAG_PARTS,
-            // `li: a(href=x)` — block expansion, another tag follows.
-            { match: [/:/, /[ \t]+/], scope: { 1: 'punctuation' }, relevance: 0 },
-            OUTPUT,
-            // `h3 #{ title }`: text that opens with an interpolation is typical
-            // of Pug; in Ruby or CoffeeScript, `#{` sits inside quotes.
-            { match: /[ \t]+(?=[#!]\{)/, relevance: 3, starts: TEXT },
-            { match: /[ \t]+/, relevance: 0, starts: TEXT },
+            { begin: /(?=[^:\s])/, end: /(?=:[ \t]|$)/, ...JS, contains: NESTED },
+            { ...BLOCK_EXPANSION, starts: { end: /$/, relevance: 0, contains: TAG_REST } },
         ],
     }
 
@@ -205,8 +219,9 @@ export default function pug(hljs) {
                 starts: { end: /$/, ...JS },
             },
             keywordLine(/(?:block(?:[ \t]+(?:append|prepend))?|append|prepend)(?![\w-])/, 5),
-            keywordLine(/(?:else[ \t]+if|if|unless|while|case|when)(?![\w-])/, 0, JS),
-            keywordLine(/(?:else|default|yield)(?![\w-])/, 0),
+            keywordLine(/(?:when|default)(?![\w-])/, 0, CASE_BRANCH),
+            keywordLine(/(?:else[ \t]+if|if|unless|while|case)(?![\w-])/, 0, JS),
+            keywordLine(/(?:else|yield)(?![\w-])/, 0),
             {
                 match: [INDENT, /\|/],
                 scope: { 2: 'punctuation' },

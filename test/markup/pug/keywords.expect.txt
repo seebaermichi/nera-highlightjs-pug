@@ -15,7 +15,7 @@
 <span class="hljs-keyword">while</span> <span class="language-javascript">n &lt; <span class="hljs-number">4</span></span>
   <span class="hljs-name">p</span><span class="hljs-operator">=</span> <span class="language-javascript">n++</span>
 <span class="hljs-keyword">case</span> <span class="language-javascript">kind</span>
-  <span class="hljs-keyword">when</span> <span class="language-javascript"><span class="hljs-string">&#x27;a&#x27;</span></span>
+  <span class="hljs-keyword">when</span> <span class="hljs-string">&#x27;a&#x27;</span>
     <span class="hljs-name">p</span> A
   <span class="hljs-keyword">default</span>
     <span class="hljs-name">p</span> Other

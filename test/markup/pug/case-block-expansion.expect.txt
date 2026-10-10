@@ -1,0 +1,6 @@
+<span class="hljs-keyword">case</span> <span class="language-javascript">friends</span>
+  <span class="hljs-keyword">when</span> <span class="language-javascript"><span class="hljs-number">0</span></span><span class="hljs-punctuation">:</span> <span class="hljs-name">p</span> you have no friends
+  <span class="hljs-keyword">when</span> <span class="language-javascript"><span class="hljs-number">1</span></span>
+    <span class="hljs-name">p</span> you have a friend
+  <span class="hljs-keyword">when</span> <span class="language-javascript">{ <span class="hljs-attr">a</span>: <span class="hljs-number">1</span> }</span><span class="language-javascript">.<span class="hljs-property">a</span></span><span class="hljs-punctuation">:</span> <span class="hljs-name">p</span><span class="hljs-selector-class">.x</span> object
+  <span class="hljs-keyword">default</span><span class="hljs-punctuation">:</span> <span class="hljs-name">p</span> you have <span class="hljs-subst">#{<span class="language-javascript"> friends </span>}</span> friends
