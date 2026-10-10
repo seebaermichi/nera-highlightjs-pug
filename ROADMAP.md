@@ -140,9 +140,9 @@ Follow `../nera-plugin-images/ROADMAP.md` slice 8, **confirming every outward st
 - [ ] 1.0.0 bootstrap publish by hand (the user runs `npm publish`), Trusted Publisher, then a real **1.0.1 via CI within two days** so the Trusted Publisher validates.
 - [ ] PR to `highlightjs/highlight.js` adding the package to `SUPPORTED_LANGUAGES.md` (row format as the existing 3rd-party entries). Wait for the user's go before opening it.
 - [ ] Not a Nera plugin, so **not** in `generator/PLUGINS.md` or the nera.js.org plugin catalog. Mention it in the code-blocks README instead.
-- [ ] Code-blocks ROADMAP slice 4: tick the Pug item, add the dependency there. Extend its "color the scopes" item with `params`, `punctuation` and `keyword` (D2 rows added in slices 1–2).
+- [x] Code-blocks ROADMAP slice 4: tick the Pug item, add the dependency there. Extend its "color the scopes" item with `params`, `punctuation` and `keyword` (D2 rows added in slices 1–2). **Done 2026-10-10** (`nera-plugin-code-blocks` `f343a75`): Pug item ticked; the dependency itself is a new open item there, since that repo has no `package.json` yet. The scope list got `params` plus the JavaScript scopes `property`, `title.class`, `regexp`; `punctuation`, `keyword` and `meta` were left out, because the field-test site's CSS already colors them.
 - [ ] Link `@nera-static/plugin-code-blocks` from this README once its repo is public.
-- [ ] Workspace `CLAUDE.md`: add the folder to the workspace layout and to the non-plugin members of the `@nera-static` scope.
+- [x] Workspace `CLAUDE.md`: add the folder to the workspace layout and to the non-plugin members of the `@nera-static` scope. **Done 2026-10-10**; update its "1.0.0 prepared" wording once released.
 
 ---
 
