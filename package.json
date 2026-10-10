@@ -1,6 +1,6 @@
 {
     "name": "@nera-static/highlightjs-pug",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Pug (formerly Jade) language grammar for highlight.js.",
     "type": "module",
     "main": "./src/languages/pug.js",
