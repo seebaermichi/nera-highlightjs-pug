@@ -125,9 +125,14 @@ Each slice ends with `npx vitest run && npm run lint` green, the checkboxes tick
 - No regex lookbehind in the grammar (older Safari); weights sit on a non-sub-language outer mode with the JavaScript in an inner mode.
 
 ### Slice 3 — `dist/` and README
-- [ ] Build per D3, CI check that `dist/` matches.
-- [ ] README: install, Node/ESM use, browser/CDN use, the scope table, the limits, link to nera.js.org and to `@nera-static/plugin-code-blocks`.
-- [ ] Field check: install the packed tarball into the code-blocks plugin (or the field-test site's local plugin) and look at the Pug blocks of nera.js.org in the browser with a common highlight.js theme.
+- [x] Build per D3, CI check that `dist/` matches.
+- [x] README: install, Node/ESM use, browser/CDN use, the scope table, the limits, link to nera.js.org and to `@nera-static/plugin-code-blocks`.
+- [x] Field check: install the packed tarball into the code-blocks plugin (or the field-test site's local plugin) and look at the Pug blocks of nera.js.org in the browser with a common highlight.js theme.
+
+**Done 2026-10-10.** Learned and decided:
+- **Build: esbuild alone** (D3's "Rollup or esbuild + terser"): one dev dependency, `scripts/build.js` is ~30 lines, and esbuild minifies itself. `pug.min.js` is built from a two-line stdin entry (`import pug …; hljs.registerLanguage("pug", pug)`) as an IIFE, so it leaks no global; `pug.es.min.js` is the ESM build. Both ~3.7 kB. The banner carries **no version**, or every `npm version` would make `dist/` stale. Output is byte-identical on Node 20 and 22. `test/dist.test.js` checks that both files highlight exactly like `src/` (the IIFE run in a `vm` context with a global `hljs`); `test.yml` runs `npm run build && git diff --exit-code -- dist`. `publish.yml` stays the fleet copy: the tagged commit is on `main`, which `test.yml` already checked.
+- **Field check, adapted:** `@nera-static/plugin-code-blocks` has no code yet, and the field-test site has no Pug blocks (its local `plugins/code-blocks` highlights with the full highlight.js build, so it would only need `registerLanguage`). So the `npm pack` tarball (7.9 kB: `src/`, `dist/`, README, CHANGELOG, LICENSE) was unpacked, and its `dist/pug.min.js` loaded in Chrome next to highlight.js 11.12.0 from jsDelivr, with all 8 nera.js.org blocks and the hardest theme views, under the `github` and `atom-one-dark` themes. All 21 blocks highlighted, nothing visibly wrong on first lines; in both themes tags, classes, attributes, keywords and interpolation are distinct colors.
+- README: the code-blocks plugin is named without a link while it has no repo; **add the link when it is public** (slice 4 or the code-blocks release). Its ROADMAP item "color the scopes highlightjs-pug uses" should add `params`, `punctuation` and `keyword` to its list (slice 4 below).
 
 ### Slice 4 — Release and listing
 Follow `../nera-plugin-images/ROADMAP.md` slice 8, **confirming every outward step with the user**:
@@ -135,7 +140,8 @@ Follow `../nera-plugin-images/ROADMAP.md` slice 8, **confirming every outward st
 - [ ] 1.0.0 bootstrap publish by hand (the user runs `npm publish`), Trusted Publisher, then a real **1.0.1 via CI within two days** so the Trusted Publisher validates.
 - [ ] PR to `highlightjs/highlight.js` adding the package to `SUPPORTED_LANGUAGES.md` (row format as the existing 3rd-party entries). Wait for the user's go before opening it.
 - [ ] Not a Nera plugin, so **not** in `generator/PLUGINS.md` or the nera.js.org plugin catalog. Mention it in the code-blocks README instead.
-- [ ] Code-blocks ROADMAP slice 4: tick the Pug item, add the dependency there.
+- [ ] Code-blocks ROADMAP slice 4: tick the Pug item, add the dependency there. Extend its "color the scopes" item with `params`, `punctuation` and `keyword` (D2 rows added in slices 1–2).
+- [ ] Link `@nera-static/plugin-code-blocks` from this README once its repo is public.
 - [ ] Workspace `CLAUDE.md`: add the folder to the workspace layout and to the non-plugin members of the `@nera-static` scope.
 
 ---
