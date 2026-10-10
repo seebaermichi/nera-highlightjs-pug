@@ -1,0 +1,23 @@
+extends ../layouts/layout
+
+//- Legal and error pages. A page with three or more `##` sections (the privacy
+//- policy) gets a sticky table of contents; the headings receive ids for it.
+block content
+  - const tx = app.theme.config.text[lang]
+  - const sections = []
+  - const html = content.replace(/<h2>(.*?)<\/h2>/g, (match, title) => { const id = `s${ sections.length + 1 }`; sections.push({ id, title: title.replace(/^\d+\.\s*/, '') }); return `<h2 id="${ id }">${ title }</h2>` })
+  - const withToc = sections.length >= 3
+
+  main.page#main
+    .wrap.sec-tab
+      span.t #{ tx.legal }
+      span.t #{ meta.slug || pageSlug }
+
+    .wrap(class=withToc ? 'layout' : undefined)
+      if withToc
+        nav.toc(aria-label=tx.toc_nav)
+          ol
+            each section in sections
+              li
+                a(href=`#${ section.id }`) !{ section.title }
+      .doc !{ html }

@@ -1,0 +1,20 @@
+<span class="hljs-keyword">extends</span> <span class="hljs-string">../layouts/layout</span>
+
+<span class="hljs-keyword">block</span> content
+  <span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> tx = app.<span class="hljs-property">theme</span>.<span class="hljs-property">config</span>.<span class="hljs-property">text</span>[lang]</span>
+  <span class="hljs-keyword">include</span> <span class="hljs-string">../mixins/section</span>
+
+  <span class="hljs-name">main</span><span class="hljs-selector-id">#main</span>
+    <span class="hljs-keyword">include</span> <span class="hljs-string">../components/intro</span>
+
+    <span class="hljs-keyword">include</span> <span class="hljs-string">../components/services</span>
+
+    <span class="hljs-keyword">include</span> <span class="hljs-string">../components/references</span>
+
+    <span class="hljs-keyword">include</span> <span class="hljs-string">../components/courses</span>
+
+    <span class="hljs-keyword">include</span> <span class="hljs-string">../components/blog</span>
+
+    <span class="hljs-keyword">include</span> <span class="hljs-string">../components/about-me</span>
+
+    <span class="hljs-keyword">include</span> <span class="hljs-string">../components/contact</span>

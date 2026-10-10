@@ -1,0 +1,4 @@
+<span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> lang = meta.<span class="hljs-property">lang</span> || app.<span class="hljs-property">lang</span></span>
+<span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> pageSlug = <span class="hljs-string">`<span class="hljs-subst">${ meta.body_class || meta.title.replace(/ /g, <span class="hljs-string">&#x27;-&#x27;</span>) }</span>`</span></span>
+  <span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> x = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span> }</span>
+<span class="hljs-operator">-</span>

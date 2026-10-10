@@ -1,0 +1,6 @@
+p= post.title
+p!= post.content
+h3.title= title
+a(href=url)= label
+= 'top level'
+!= raw

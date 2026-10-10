@@ -1,0 +1,7 @@
+<span class="hljs-name">p</span> Hello <span class="hljs-subst">#{<span class="language-javascript"> name </span>}</span>!
+<span class="hljs-name">p</span> Raw <span class="hljs-subst">!{<span class="language-javascript"> html </span>}</span> here
+<span class="hljs-name">p</span> <span class="hljs-subst">#{<span class="language-javascript"> a ? </span><span class="language-javascript">{ <span class="hljs-attr">x</span>: </span><span class="hljs-string">&#x27;}&#x27;</span><span class="language-javascript"> }</span><span class="language-javascript">.<span class="hljs-property">x</span> : b </span>}</span>
+<span class="hljs-name">p</span> A <span class="hljs-subst">#[<span class="hljs-name">em</span> short <span class="hljs-subst">#[<span class="hljs-name">strong</span> nested]</span>]</span> text
+<span class="hljs-name">p</span> Escaped \#{ not } and \#[ not ]
+<span class="hljs-punctuation">|</span> Piped <span class="hljs-subst">#{<span class="language-javascript"> value </span>}</span> and <span class="hljs-subst">#[<span class="hljs-name">a</span>(<span class="hljs-attr">href</span>=<span class="language-javascript">x</span>) link]</span>
+<span class="hljs-name">title</span> <span class="hljs-subst">#{<span class="language-javascript"> meta.<span class="hljs-property">title</span> </span>}</span> | <span class="hljs-subst">#{<span class="language-javascript"> <span class="hljs-title function_">t</span>(</span><span class="hljs-string">&#x27;app_name&#x27;</span><span class="language-javascript">) </span>}</span>

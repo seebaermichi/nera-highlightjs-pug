@@ -1,0 +1,4 @@
+:markdown-it
+  # Heading
+:markdown-it(linkify)
+:uglify-js:babel

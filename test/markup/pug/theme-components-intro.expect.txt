@@ -1,0 +1,16 @@
+<span class="hljs-comment">//- Hero. The intro stack&#x27;s `# Name _Role_` heading becomes the display</span>
+<span class="hljs-comment">//- headline with the role underneath; its first paragraph is the lead.</span>
+<span class="hljs-name">section</span><span class="hljs-selector-class">.hero</span><span class="hljs-selector-id">#home</span>
+    <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.hero-grid</span>
+        <span class="hljs-selector-class">.hero-main</span>
+            <span class="hljs-selector-class">.label</span> <span class="hljs-subst">#{<span class="language-javascript"> tx.<span class="hljs-property">hero</span>.<span class="hljs-property">eyebrow</span> </span>}</span>
+            <span class="hljs-selector-class">.hero-text</span>
+                <span class="hljs-punctuation">|</span> <span class="hljs-subst">!{<span class="language-javascript"> app.<span class="hljs-property">stacks</span>[</span><span class="hljs-string">&#x27;intro_&#x27;</span><span class="language-javascript"> + lang].<span class="hljs-property">content</span> </span>}</span>
+            <span class="hljs-selector-class">.hero-cta</span>
+                <span class="hljs-name">a</span><span class="hljs-selector-class">.btn</span>(<span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#contact&quot;</span>) <span class="hljs-subst">#{<span class="language-javascript"> <span class="hljs-title function_">t</span>(</span><span class="hljs-string">&#x27;contact_me&#x27;</span><span class="language-javascript">) </span>}</span>
+                <span class="hljs-name">a</span><span class="hljs-selector-class">.btn</span><span class="hljs-selector-class">.ghost</span>(<span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#references&quot;</span>) <span class="hljs-subst">#{<span class="language-javascript"> tx.<span class="hljs-property">hero</span>.<span class="hljs-property">to_references</span> </span>}</span>
+        <span class="hljs-selector-class">.hero-side</span>
+            <span class="hljs-keyword">each</span> item <span class="hljs-keyword">in</span> <span class="language-javascript">tx.<span class="hljs-property">hero</span>.<span class="hljs-property">meta</span></span>
+                <span class="hljs-selector-class">.meta</span>
+                    <span class="hljs-selector-class">.k</span> <span class="hljs-subst">#{<span class="language-javascript"> item.<span class="hljs-property">k</span> </span>}</span>
+                    <span class="hljs-selector-class">.v</span>(<span class="hljs-attr">class</span>=<span class="language-javascript">item.<span class="hljs-property">small</span> ? </span><span class="hljs-string">&#x27;sm&#x27;</span><span class="language-javascript"> : <span class="hljs-literal">undefined</span></span>) <span class="hljs-subst">#{<span class="language-javascript"> item.<span class="hljs-property">v</span> </span>}</span>

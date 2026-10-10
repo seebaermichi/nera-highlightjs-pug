@@ -1,0 +1,22 @@
+<span class="hljs-keyword">extends</span> <span class="hljs-string">../layouts/layout</span>
+
+<span class="hljs-keyword">block</span> content
+  <span class="hljs-name">main</span><span class="hljs-selector-class">.page</span><span class="hljs-selector-id">#main</span>
+    <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.sec-tab</span>
+      <span class="hljs-name">span</span><span class="hljs-selector-class">.t</span> // Blog
+      <span class="hljs-keyword">if</span> <span class="language-javascript">(meta.<span class="hljs-property">createdAt</span>)</span>
+        <span class="hljs-name">time</span><span class="hljs-selector-class">.t</span>(<span class="hljs-attr">datetime</span>=<span class="language-javascript"><span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span></span><span class="language-javascript">(meta.<span class="hljs-property">createdAt</span>)</span><span class="language-javascript">.<span class="hljs-property">toISOString</span></span><span class="language-javascript">()</span><span class="language-javascript">.<span class="hljs-property">slice</span></span><span class="language-javascript">(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)</span>)
+          <span class="hljs-punctuation">|</span> <span class="hljs-subst">#{<span class="language-javascript"> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(meta.<span class="hljs-property">createdAt</span>).<span class="hljs-title function_">toLocaleDateString</span>(lang === </span><span class="hljs-string">&#x27;de&#x27;</span><span class="language-javascript"> ? </span><span class="hljs-string">&#x27;de-DE&#x27;</span><span class="language-javascript"> : </span><span class="hljs-string">&#x27;en-GB&#x27;</span><span class="language-javascript">, </span><span class="language-javascript">{ <span class="hljs-attr">day</span>: </span><span class="hljs-string">&#x27;numeric&#x27;</span><span class="language-javascript">, <span class="hljs-attr">month</span>: </span><span class="hljs-string">&#x27;long&#x27;</span><span class="language-javascript">, <span class="hljs-attr">year</span>: </span><span class="hljs-string">&#x27;numeric&#x27;</span><span class="language-javascript"> }</span><span class="language-javascript">) </span>}</span>
+
+    <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.head</span>
+      <span class="hljs-selector-class">.label</span> // <span class="hljs-subst">#{<span class="language-javascript"> meta.<span class="hljs-property">tags</span> || </span><span class="hljs-string">&#x27;Blog&#x27;</span><span class="language-javascript"> </span>}</span>
+      <span class="hljs-name">h1</span> <span class="hljs-subst">#{<span class="language-javascript"> meta.<span class="hljs-property">title</span> </span>}</span>
+      <span class="hljs-keyword">if</span> <span class="language-javascript">(meta.<span class="hljs-property">sub_title</span>)</span>
+        <span class="hljs-name">p</span><span class="hljs-selector-class">.lead</span> <span class="hljs-subst">#{<span class="language-javascript"> meta.<span class="hljs-property">sub_title</span> </span>}</span>
+
+    <span class="hljs-selector-class">.wrap</span>
+      <span class="hljs-name">article</span><span class="hljs-selector-class">.doc</span><span class="hljs-selector-class">.article</span>
+        <span class="hljs-keyword">if</span> <span class="language-javascript">(meta.<span class="hljs-property">image</span>)</span>
+          <span class="hljs-name">img</span><span class="hljs-selector-class">.teaser</span>(<span class="hljs-attr">src</span>=<span class="language-javascript">meta.<span class="hljs-property">image</span></span>, <span class="hljs-attr">alt</span>=<span class="language-javascript">meta.<span class="hljs-property">image_alt</span></span>)
+
+        <span class="hljs-punctuation">|</span> <span class="hljs-subst">!{<span class="language-javascript"> content </span>}</span>

@@ -1,0 +1,39 @@
+<span class="language-xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span></span>
+<span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> lang = meta.<span class="hljs-property">lang</span> || app.<span class="hljs-property">lang</span></span>
+<span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> pageSlug = <span class="hljs-string">`<span class="hljs-subst">${ meta.body_class || meta.title.replace(/ /g, <span class="hljs-string">&#x27;-&#x27;</span>).toLowerCase() }</span>`</span></span>
+<span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> isHome = pageSlug === <span class="hljs-string">&#x27;home&#x27;</span></span>
+<span class="hljs-name">html</span>(<span class="hljs-attr">lang</span>=<span class="hljs-string">`<span class="hljs-subst">${<span class="language-javascript"> lang </span>}</span>`</span>)
+  <span class="hljs-name">head</span>
+    <span class="hljs-name">meta</span>(<span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>)
+    <span class="hljs-name">meta</span>(<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span>, <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>)
+
+    <span class="hljs-name">title</span> <span class="hljs-subst">#{<span class="language-javascript"> meta.<span class="hljs-property">title</span> </span>}</span> | <span class="hljs-subst">#{<span class="language-javascript"> <span class="hljs-title function_">t</span>(</span><span class="hljs-string">&#x27;app_name&#x27;</span><span class="language-javascript">) </span>}</span>
+
+    <span class="hljs-name">meta</span>(<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;description&quot;</span>, <span class="hljs-attr">content</span>=<span class="hljs-string">`<span class="hljs-subst">${<span class="language-javascript"> meta.<span class="hljs-property">description</span> || <span class="hljs-title function_">t</span>(</span><span class="hljs-string">&#x27;app_description&#x27;</span><span class="language-javascript">) </span>}</span>`</span>)
+    <span class="hljs-name">meta</span>(<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;keywords&quot;</span>, <span class="hljs-attr">content</span>=<span class="hljs-string">`<span class="hljs-subst">${<span class="language-javascript"> meta.<span class="hljs-property">keywords</span> || <span class="hljs-title function_">t</span>(</span><span class="hljs-string">&#x27;app_keywords&#x27;</span><span class="language-javascript">) </span>}</span>`</span>)
+    <span class="hljs-name">meta</span>(<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;generator&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;Nera&quot;</span>)
+    <span class="hljs-name">meta</span>(<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;robots&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">`<span class="hljs-subst">${<span class="language-javascript"> meta.<span class="hljs-property">robots</span> || app.<span class="hljs-property">robots</span> </span>}</span>`</span>)
+
+    <span class="hljs-keyword">include</span> <span class="hljs-string">../mixins/advanced-meta</span>
+    <span class="hljs-title function_">+advanced_media</span>(<span class="language-javascript">lang</span>)
+
+    <span class="hljs-keyword">include</span> <span class="hljs-string">/vendor/plugin-canonical-links/index</span>
+
+    <span class="hljs-name">link</span>(<span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;preload&quot;</span>, <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/fonts/space-grotesk-latin-wght-normal.woff2&quot;</span>, <span class="hljs-attr">as</span>=<span class="hljs-string">&quot;font&quot;</span>, <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;font/woff2&quot;</span>, <span class="hljs-attr">crossorigin</span>)
+    <span class="hljs-name">link</span>(<span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/dist/index.css&quot;</span>, <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>)
+
+    <span class="hljs-keyword">if</span> <span class="language-javascript">(meta.<span class="hljs-property">additional_css</span>)</span>
+      <span class="hljs-name">link</span>(<span class="hljs-attr">href</span>=<span class="language-javascript">meta.<span class="hljs-property">additional_css</span></span>, <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>)
+
+  <span class="hljs-name">body</span>(<span class="hljs-attr">class</span>=<span class="language-javascript">pageSlug</span>, <span class="hljs-attr">data-page</span>=<span class="language-javascript">pageSlug</span>)
+    <span class="hljs-name">a</span><span class="hljs-selector-class">.skip-link</span>(<span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#main&quot;</span>) <span class="hljs-subst">#{<span class="language-javascript"> app.<span class="hljs-property">theme</span>.<span class="hljs-property">config</span>.<span class="hljs-property">text</span>[lang].<span class="hljs-property">skip_to_content</span> </span>}</span>
+
+    <span class="hljs-keyword">include</span> <span class="hljs-string">../mixins/header</span>
+    <span class="hljs-title function_">+header</span>(<span class="language-javascript">lang, isHome</span>)
+
+    <span class="hljs-keyword">block</span> content
+
+    <span class="hljs-keyword">include</span> <span class="hljs-string">../mixins/footer</span>
+    <span class="hljs-title function_">+footer</span>(<span class="language-javascript">lang</span>)
+
+    <span class="hljs-name">script</span>(<span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/app.min.js&quot;</span>, <span class="hljs-attr">defer</span>)

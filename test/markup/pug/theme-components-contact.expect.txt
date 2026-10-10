@@ -1,0 +1,19 @@
+<span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> cs = tx.<span class="hljs-property">sections</span>.<span class="hljs-property">contact</span></span>
+<span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> contact = app.<span class="hljs-property">theme</span>.<span class="hljs-property">config</span>.<span class="hljs-property">contact</span></span>
+<span class="hljs-name">section</span><span class="hljs-selector-id">#contact</span>
+    <span class="hljs-title function_">+secTab</span>(<span class="language-javascript">cs.<span class="hljs-property">tab</span>, app.<span class="hljs-property">theme</span>.<span class="hljs-property">config</span>.<span class="hljs-property">geo</span></span>)
+    <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.pad</span>
+        <span class="hljs-selector-class">.contact</span>
+            <span class="hljs-selector-class">.contact-l</span>
+                <span class="hljs-selector-class">.label</span> <span class="hljs-subst">#{<span class="language-javascript"> cs.<span class="hljs-property">label</span> </span>}</span>
+                <span class="hljs-name">h2</span> <span class="hljs-subst">#{<span class="language-javascript"> cs.<span class="hljs-property">title</span> </span>}</span>
+                <span class="hljs-name">p</span><span class="hljs-selector-class">.lead</span> <span class="hljs-subst">#{<span class="language-javascript"> cs.<span class="hljs-property">lead</span> </span>}</span>
+                <span class="hljs-selector-class">.ci</span>
+                    <span class="hljs-selector-class">.row</span>
+                        <span class="hljs-selector-class">.k</span> <span class="hljs-subst">#{<span class="language-javascript"> cs.<span class="hljs-property">phone</span> </span>}</span>
+                        <span class="hljs-name">a</span><span class="hljs-selector-class">.big</span>(<span class="hljs-attr">href</span>=<span class="hljs-string">`tel:<span class="hljs-subst">${<span class="language-javascript"> contact.<span class="hljs-property">tel</span> </span>}</span>`</span>) <span class="hljs-subst">#{<span class="language-javascript"> contact.<span class="hljs-property">phone</span> </span>}</span>
+                    <span class="hljs-selector-class">.row</span>
+                        <span class="hljs-selector-class">.k</span> <span class="hljs-subst">#{<span class="language-javascript"> cs.<span class="hljs-property">email</span> </span>}</span>
+                        <span class="hljs-name">a</span><span class="hljs-selector-class">.big</span>(<span class="hljs-attr">href</span>=<span class="hljs-string">`mailto:<span class="hljs-subst">${<span class="language-javascript"> contact.<span class="hljs-property">email</span> </span>}</span>`</span>) <span class="hljs-subst">#{<span class="language-javascript"> contact.<span class="hljs-property">email</span> </span>}</span>
+            <span class="hljs-selector-class">.contact-r</span>
+                <span class="hljs-keyword">include</span> <span class="hljs-string">/vendor/plugin-contact-form/contact-form</span>

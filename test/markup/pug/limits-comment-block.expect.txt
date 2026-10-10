@@ -1,0 +1,3 @@
+<span class="hljs-comment">//-</span>
+  <span class="hljs-name">A</span> multi-line comment: only the marker
+  <span class="hljs-name">line</span> is a comment.

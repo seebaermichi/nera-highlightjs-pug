@@ -1,0 +1,18 @@
+- const services = app.popularContent['is_service_' + lang]
+if (services.length > 0)
+    section#service
+        +secTab(tx.sections.service.tab, tx.sections.service.code)
+        .wrap.pad
+            +headRow(tx.sections.service)
+            .svc
+                each service, i in services
+                    article.svc-row
+                        .n #{ String(i + 1).padStart(2, '0') }
+                        h3 #{ service.title }
+                        if (service.summary)
+                            p #{ service.summary }
+                        else
+                            .svc-text !{ service.content }
+                        if (service.illustration)
+                            .svc-media
+                                img(src=service.illustration, alt="", width="320", height="160", loading="lazy")

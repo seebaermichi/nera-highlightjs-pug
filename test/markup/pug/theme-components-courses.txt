@@ -1,0 +1,31 @@
+- const courses = app.popularContent['is_course_' + lang]
+if (courses.length > 0)
+    section#courses
+        +secTab(tx.sections.courses.tab, tx.sections.courses.code)
+        .wrap.pad
+            +headRow(tx.sections.courses)
+            each course in courses
+                .course
+                    .course-l
+                        h3 #{ course.title }
+                        if (course.summary)
+                            p #{ course.summary }
+                        else
+                            .course-text !{ course.content }
+                        if (course.duration || course.price)
+                            .price-row
+                                div
+                                    .k #{ tx.duration }
+                                    .n #{ course.duration }
+                                div
+                                    .k #{ tx.price }
+                                    .n #{ course.price }
+                        if (course.note)
+                            p.note #{ course.note }
+                        a.btn(href="#contact") #{ tx.more_course_info }
+                    if (course.modules)
+                        ol.mods
+                            each module, i in course.modules
+                                li
+                                    span.mi #{ String(i + 1).padStart(2, '0') }
+                                    | #{ module }

@@ -1,0 +1,33 @@
+//- Sticky top bar. The home page gets the full section navigation, every other
+//- page (legal pages, blog posts, tag overviews) the "back to home" button.
+//- Navigation entries pointing at an index.html are the language switchers of
+//- config/navigation.yaml; they are rendered as the [DE] EN toggle instead.
+mixin header(lang, isHome)
+    - const tx = app.theme.config.text[lang]
+    - const homeHref = lang === app.lang ? '/' : `/${ lang }/`
+    - const elements = app.nav['main_' + lang].elements
+    - const sectionLinks = elements.filter((item) => !item.href.includes('index.html'))
+    - const langLinks = elements.filter((item) => item.href.includes('index.html'))
+
+    header.nav(data-nav)
+        .nav-in
+            a.brand(href=`${ homeHref }#home`)
+                span.sq
+                | Michael Becker
+
+            if isHome
+                nav.links#main-nav(aria-label=tx.main_nav)
+                    each item in sectionLinks
+                        a(href=item.href.replace(/^\/(en\/)?/, ''), data-nav-link) #{ item.name }
+
+                .nav-right
+                    span.lang
+                        span [#{ lang.toUpperCase() }]
+                        each item in langLinks
+                            a(href=item.href, hreflang=item.name.toLowerCase(), lang=item.name.toLowerCase()) #{ item.name }
+                    a.btn.btn-contact(href="#contact") #{ tx.contact }
+                    button.nav-toggle(type="button", aria-controls="main-nav", aria-expanded="false", data-nav-toggle)
+                        span.nav-toggle-bars(aria-hidden="true")
+                        span.sr-only Menu
+            else
+                a.back(href=`${ homeHref }#home`) #{ tx.back_home }

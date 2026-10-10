@@ -1,0 +1,31 @@
+extends ../layouts/layout
+
+block content
+  - const tx = app.theme.config.text[lang]
+  include ../mixins/section
+
+  main.page#main
+    .wrap.sec-tab
+      span.t // Tags
+      span.t.mono #{ meta.taggedPages.length } posts[]
+
+    .wrap.head
+      .label // Tag
+      h1 #{ meta.title }
+
+    .wrap.pad
+      if meta.taggedPages.length > 0
+        .blog-grid
+          each page in meta.taggedPages
+            a.post(href=page.meta.href)
+              .media
+                if (page.meta.illustration)
+                  img(src=page.meta.illustration, alt="", width="200", height="200", loading="lazy")
+                else if (page.meta.image)
+                  img(src=page.meta.image, alt=page.meta.image_alt, loading="lazy")
+              .post-body
+                h2 #{ page.meta.title }
+                p #{ page.meta.sub_title }
+                span.card-link
+                  | #{ tx.read_more }&nbsp;
+                  +arrow

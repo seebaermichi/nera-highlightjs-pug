@@ -1,0 +1,22 @@
+extends ../layouts/layout
+
+block content
+  main.page#main
+    .wrap.sec-tab
+      span.t // Blog
+      if (meta.createdAt)
+        time.t(datetime=new Date(meta.createdAt).toISOString().slice(0, 10))
+          | #{ new Date(meta.createdAt).toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) }
+
+    .wrap.head
+      .label // #{ meta.tags || 'Blog' }
+      h1 #{ meta.title }
+      if (meta.sub_title)
+        p.lead #{ meta.sub_title }
+
+    .wrap
+      article.doc.article
+        if (meta.image)
+          img.teaser(src=meta.image, alt=meta.image_alt)
+
+        | !{ content }

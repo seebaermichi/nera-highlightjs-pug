@@ -1,0 +1,23 @@
+- const posts = app.popularContent['is_blog_' + lang]
+if (posts.length > 0)
+    section#blog
+        +secTab(tx.sections.blog.tab, tx.sections.blog.code)
+        .wrap.pad
+            +headRow(tx.sections.blog)
+            .blog-grid
+                each post in posts
+                    a.post(href=post.href)
+                        .media
+                            if (post.illustration)
+                                img(src=post.illustration, alt="", width="200", height="200", loading="lazy")
+                            else if (post.image)
+                                img(src=post.image, alt=post.image_alt, loading="lazy")
+                        .post-body
+                            if (post.createdAt)
+                                time.date(datetime=new Date(post.createdAt).toISOString().slice(0, 10))
+                                    | #{ new Date(post.createdAt).toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-GB', { month: 'short', year: 'numeric' }) }
+                            h3 #{ post.title }
+                            p #{ post.sub_title }
+                            span.card-link
+                                | #{ tx.read_more }&nbsp;
+                                +arrow

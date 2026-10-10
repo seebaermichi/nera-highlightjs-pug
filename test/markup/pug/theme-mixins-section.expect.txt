@@ -1,0 +1,15 @@
+<span class="hljs-comment">//- The mono &quot;01 / Leistungen ... services[]&quot; strip that opens every section.</span>
+<span class="hljs-keyword">mixin</span> <span class="hljs-title function_">secTab</span>(<span class="hljs-params">tab, code</span>)
+    <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.sec-tab</span>
+        <span class="hljs-name">span</span><span class="hljs-selector-class">.t</span> <span class="hljs-subst">#{<span class="language-javascript"> tab </span>}</span>
+        <span class="hljs-name">span</span><span class="hljs-selector-class">.t</span><span class="hljs-selector-class">.mono</span> <span class="hljs-subst">#{<span class="language-javascript"> code </span>}</span>
+
+<span class="hljs-comment">//- Section headline left, short lead right.</span>
+<span class="hljs-keyword">mixin</span> <span class="hljs-title function_">headRow</span>(<span class="hljs-params">section</span>)
+    <span class="hljs-selector-class">.head-row</span>
+        <span class="hljs-name">h2</span> <span class="hljs-subst">#{<span class="language-javascript"> section.<span class="hljs-property">title</span> </span>}</span>
+        <span class="hljs-name">p</span> <span class="hljs-subst">#{<span class="language-javascript"> section.<span class="hljs-property">lead</span> </span>}</span>
+
+<span class="hljs-keyword">mixin</span> <span class="hljs-title function_">arrow</span>
+    <span class="hljs-name">svg</span>(<span class="hljs-attr">width</span>=<span class="hljs-string">&quot;13&quot;</span>, <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;13&quot;</span>, <span class="hljs-attr">viewBox</span>=<span class="hljs-string">&quot;0 0 14 14&quot;</span>, <span class="hljs-attr">fill</span>=<span class="hljs-string">&quot;none&quot;</span>, <span class="hljs-attr">aria-hidden</span>=<span class="hljs-string">&quot;true&quot;</span>)
+        <span class="hljs-name">path</span>(<span class="hljs-attr">d</span>=<span class="hljs-string">&quot;M3 11L11 3M11 3H5M11 3V9&quot;</span>, <span class="hljs-attr">stroke</span>=<span class="hljs-string">&quot;currentColor&quot;</span>, <span class="hljs-attr">stroke-width</span>=<span class="hljs-string">&quot;1.6&quot;</span>, <span class="hljs-attr">stroke-linecap</span>=<span class="hljs-string">&quot;round&quot;</span>, <span class="hljs-attr">stroke-linejoin</span>=<span class="hljs-string">&quot;round&quot;</span>)

@@ -59,7 +59,7 @@ highlights tag, class, attribute name, JavaScript value and interpolation, with 
 | mixin arguments (added slice 1) | `+card('Hello', 1)` | `subLanguage: javascript` |
 | `&attributes` (added slice 1) | `div&attributes(obj)` | `keyword`, argument JavaScript |
 | interpolated tag name (added slice 1) | `#{ tag }.card` | `subst`, as interpolation |
-| code line | `- const x = 1` | `subLanguage: javascript` |
+| code line | `- const x = 1` | `subLanguage: javascript`; the `-` as `operator` (added slice 2, like `=`) |
 | buffered output | `p= title`, `p!= html` | `=`/`!=` as `operator`, rest JavaScript |
 | interpolation | `#{ post.title }`, `!{ html }`, `#[em text]` | `subst`, JavaScript inside |
 | comments | `// visible`, `//- hidden` | `comment` |
@@ -67,6 +67,8 @@ highlights tag, class, attribute name, JavaScript value and interpolation, with 
 | piped text | `\| text` | `\|` as `punctuation`, text plain |
 | filters | `:markdown-it` | `meta` (body plain) |
 | block expansion | `li: a(href=x) Link` | `:` as `punctuation` |
+| literal HTML line (added slice 2) | `<!DOCTYPE html>` | `subLanguage: xml` (plain text when XML is not registered) |
+| escaped interpolation (added slice 2) | `\#{ x }`, `\#[ x ]` | plain text |
 
 highlight.js matches patterns, not indentation. Multi-line text blocks after `tag.`, filter bodies and multi-line comments are therefore only partly covered: the first line is right, indented continuation lines may be read as tags. Document this in the README; do not try to emulate indentation.
 
@@ -112,9 +114,15 @@ Each slice ends with `npx vitest run && npm run lint` green, the checkboxes tick
 - `//` is a comment only at line start; `span.t // Blog` is text, as in Pug.
 
 ### Slice 2 — JavaScript and interpolation
-- [ ] `-` code lines, `=`/`!=` output, `#{}`/`!{}`/`#[]` interpolation in text and attribute strings, filters as `meta`.
-- [ ] Fixtures from the field-test site's `themes/technical/views/` (layouts, mixins, components). Write the D2 limits down as fixtures.
-- [ ] `highlightAuto` test (D4).
+- [x] `-` code lines, `=`/`!=` output, `#{}`/`!{}`/`#[]` interpolation in text and attribute strings, filters as `meta`.
+- [x] Fixtures from the field-test site's `themes/technical/views/` (layouts, mixins, components). Write the D2 limits down as fixtures.
+- [x] `highlightAuto` test (D4).
+
+**Done 2026-10-10.** 47 markup fixtures (all 16 field-test views as `theme-*`, the D2 limits as `limits-*`), a `highlightAuto` test and a `highlight.js/lib/core` + `javascript` test (acceptance 2); 67 tests. Every line of every theme view starts with the right token (acceptance 1, first lines). Learned:
+- **Interpolation in attribute strings does not exist in Pug ≥ 2** (`a(href='#{url}')` is literal); attribute values are JavaScript, so template literals (`` `/${ lang }/` ``) are the way, and they get JavaScript's `string`/`subst`. Nothing to add.
+- **Relevance, as tuned:** generic patterns score 0 — tags, classes, ids, strings, `if`/`else`/`for … in`/`case`, `|`, `=`, `#{` in general. Weight goes to Pug-specific signals: `extends`/`include`/`mixin`/`doctype` 10, `&attributes` 10, `each … in` 5, `//-` 3, a text that *opens* with `#{`/`!{` 3 (in Ruby and CoffeeScript `#{` sits inside quotes), `tag(name=` 3, `#[` 2, `+mixin(` 2, `- const|let|var` 2. With `for … in` and every `#{` weighted, CoffeeScript was detected as Pug; the test now has Ruby and CoffeeScript samples.
+- **Positive detection is best effort.** Whole templates with `extends`/`include`/`mixin` are detected; shorter or attribute-heavy ones lose to `dns` (it scores every parenthesis), `stylus` or `routeros`. 25 of 47 fixtures are detected. Not an acceptance criterion: a ```` ```pug ```` fence names its language. The test pins the 7 that are detected so a change in weights shows up.
+- No regex lookbehind in the grammar (older Safari); weights sit on a non-sub-language outer mode with the JavaScript in an inner mode.
 
 ### Slice 3 — `dist/` and README
 - [ ] Build per D3, CI check that `dist/` matches.

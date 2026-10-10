@@ -1,0 +1,4 @@
+- const lang = meta.lang || app.lang
+- const pageSlug = `${ meta.body_class || meta.title.replace(/ /g, '-') }`
+  - const x = { a: 1 }
+-

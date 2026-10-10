@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+- const lang = meta.lang || app.lang
+- const pageSlug = `${ meta.body_class || meta.title.replace(/ /g, '-').toLowerCase() }`
+- const isHome = pageSlug === 'home'
+html(lang=`${ lang }`)
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+    title #{ meta.title } | #{ t('app_name') }
+
+    meta(name="description", content=`${ meta.description || t('app_description') }`)
+    meta(name="keywords", content=`${ meta.keywords || t('app_keywords') }`)
+    meta(name="generator" content="Nera")
+    meta(name="robots" content=`${ meta.robots || app.robots }`)
+
+    include ../mixins/advanced-meta
+    +advanced_media(lang)
+
+    include /vendor/plugin-canonical-links/index
+
+    link(rel="preload", href="/fonts/space-grotesk-latin-wght-normal.woff2", as="font", type="font/woff2", crossorigin)
+    link(href="/dist/index.css", rel="stylesheet")
+
+    if (meta.additional_css)
+      link(href=meta.additional_css, rel="stylesheet")
+
+  body(class=pageSlug, data-page=pageSlug)
+    a.skip-link(href="#main") #{ app.theme.config.text[lang].skip_to_content }
+
+    include ../mixins/header
+    +header(lang, isHome)
+
+    block content
+
+    include ../mixins/footer
+    +footer(lang)
+
+    script(src="/app.min.js", defer)

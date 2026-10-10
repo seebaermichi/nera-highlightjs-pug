@@ -1,0 +1,15 @@
+//- The mono "01 / Leistungen ... services[]" strip that opens every section.
+mixin secTab(tab, code)
+    .wrap.sec-tab
+        span.t #{ tab }
+        span.t.mono #{ code }
+
+//- Section headline left, short lead right.
+mixin headRow(section)
+    .head-row
+        h2 #{ section.title }
+        p #{ section.lead }
+
+mixin arrow
+    svg(width="13", height="13", viewBox="0 0 14 14", fill="none", aria-hidden="true")
+        path(d="M3 11L11 3M11 3H5M11 3V9", stroke="currentColor", stroke-width="1.6", stroke-linecap="round", stroke-linejoin="round")

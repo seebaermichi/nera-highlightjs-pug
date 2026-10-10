@@ -1,0 +1,14 @@
+mixin footer(lang)
+    - const homeHref = lang === app.lang ? '/' : `/${ lang }/`
+    - const tx = app.theme.config.text[lang]
+    footer.wrap
+        .foot
+            a.brand(href=`${ homeHref }#home`)
+                span.sq
+                | Michael Becker
+            nav.links(aria-label=tx.footer_nav)
+                each item in app.nav['footer_' + lang].elements
+                    - const isActive = item.href === meta.href
+                    a(href=item.href, class=isActive ? app.nav.activeClass : undefined, aria-current=isActive ? 'page' : undefined) #{ item.name }
+            .copy
+                | &copy; #{ new Date().getFullYear() } · Berlin #{ app.theme.config.geo.replace(' ', '') }

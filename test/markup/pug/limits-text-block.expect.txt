@@ -1,0 +1,5 @@
+<span class="hljs-name">p</span>.
+  <span class="hljs-name">Text</span> in a block. The first word of each
+  <span class="hljs-name">continuation</span> line is read as a tag.
+<span class="hljs-name">script</span>.
+  <span class="hljs-keyword">if</span> <span class="language-javascript">(<span class="hljs-variable language_">window</span>.<span class="hljs-property">x</span>) <span class="hljs-title function_">run</span>()</span>

@@ -1,0 +1,10 @@
+section#about-me
+    +secTab(tx.sections.about.tab, tx.sections.about.code)
+    .wrap.pad
+        .about
+            .about-l
+                .about-media
+                    img(src="/illu/06-ueber-mich.svg", alt="", width="300", height="300", loading="lazy")
+            .about-r
+                | !{ app.stacks['about_me_' + lang].content }
+                .sig #{ tx.signature }

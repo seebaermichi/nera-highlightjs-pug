@@ -1,0 +1,3 @@
+<span class="hljs-meta">:markdown-it</span>
+  <span class="hljs-name">Some</span> *Markdown* text
+  <span class="hljs-operator">-</span> <span class="language-javascript">a list item</span>

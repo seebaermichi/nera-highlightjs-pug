@@ -1,0 +1,16 @@
+//- Hero. The intro stack's `# Name _Role_` heading becomes the display
+//- headline with the role underneath; its first paragraph is the lead.
+section.hero#home
+    .wrap.hero-grid
+        .hero-main
+            .label #{ tx.hero.eyebrow }
+            .hero-text
+                | !{ app.stacks['intro_' + lang].content }
+            .hero-cta
+                a.btn(href="#contact") #{ t('contact_me') }
+                a.btn.ghost(href="#references") #{ tx.hero.to_references }
+        .hero-side
+            each item in tx.hero.meta
+                .meta
+                    .k #{ item.k }
+                    .v(class=item.small ? 'sm' : undefined) #{ item.v }

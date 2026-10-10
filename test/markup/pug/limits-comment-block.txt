@@ -1,0 +1,3 @@
+//-
+  A multi-line comment: only the marker
+  line is a comment.

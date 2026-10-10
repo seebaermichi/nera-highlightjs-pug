@@ -1,0 +1,19 @@
+- const cs = tx.sections.contact
+- const contact = app.theme.config.contact
+section#contact
+    +secTab(cs.tab, app.theme.config.geo)
+    .wrap.pad
+        .contact
+            .contact-l
+                .label #{ cs.label }
+                h2 #{ cs.title }
+                p.lead #{ cs.lead }
+                .ci
+                    .row
+                        .k #{ cs.phone }
+                        a.big(href=`tel:${ contact.tel }`) #{ contact.phone }
+                    .row
+                        .k #{ cs.email }
+                        a.big(href=`mailto:${ contact.email }`) #{ contact.email }
+            .contact-r
+                include /vendor/plugin-contact-form/contact-form

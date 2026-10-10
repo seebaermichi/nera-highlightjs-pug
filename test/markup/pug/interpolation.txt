@@ -1,0 +1,7 @@
+p Hello #{ name }!
+p Raw !{ html } here
+p #{ a ? { x: '}' }.x : b }
+p A #[em short #[strong nested]] text
+p Escaped \#{ not } and \#[ not ]
+| Piped #{ value } and #[a(href=x) link]
+title #{ meta.title } | #{ t('app_name') }

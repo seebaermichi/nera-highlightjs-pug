@@ -1,0 +1,23 @@
+<span class="hljs-keyword">extends</span> <span class="hljs-string">../layouts/layout</span>
+
+<span class="hljs-comment">//- Legal and error pages. A page with three or more `##` sections (the privacy</span>
+<span class="hljs-comment">//- policy) gets a sticky table of contents; the headings receive ids for it.</span>
+<span class="hljs-keyword">block</span> content
+  <span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> tx = app.<span class="hljs-property">theme</span>.<span class="hljs-property">config</span>.<span class="hljs-property">text</span>[lang]</span>
+  <span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> sections = []</span>
+  <span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> html = content.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/&lt;h2&gt;(.*?)&lt;\/h2&gt;/g</span>, <span class="hljs-function">(<span class="hljs-params">match, title</span>) =&gt;</span> { <span class="hljs-keyword">const</span> id = <span class="hljs-string">`s<span class="hljs-subst">${ sections.length + <span class="hljs-number">1</span> }</span>`</span>; sections.<span class="hljs-title function_">push</span>({ id, <span class="hljs-attr">title</span>: title.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/^\d+\.\s*/</span>, <span class="hljs-string">&#x27;&#x27;</span>) }); <span class="hljs-keyword">return</span> <span class="hljs-string">`&lt;h2 id=&quot;<span class="hljs-subst">${ id }</span>&quot;&gt;<span class="hljs-subst">${ title }</span>&lt;/h2&gt;`</span> })</span>
+  <span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> withToc = sections.<span class="hljs-property">length</span> &gt;= <span class="hljs-number">3</span></span>
+
+  <span class="hljs-name">main</span><span class="hljs-selector-class">.page</span><span class="hljs-selector-id">#main</span>
+    <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.sec-tab</span>
+      <span class="hljs-name">span</span><span class="hljs-selector-class">.t</span> <span class="hljs-subst">#{<span class="language-javascript"> tx.<span class="hljs-property">legal</span> </span>}</span>
+      <span class="hljs-name">span</span><span class="hljs-selector-class">.t</span> <span class="hljs-subst">#{<span class="language-javascript"> meta.<span class="hljs-property">slug</span> || pageSlug </span>}</span>
+
+    <span class="hljs-selector-class">.wrap</span>(<span class="hljs-attr">class</span>=<span class="language-javascript">withToc ? </span><span class="hljs-string">&#x27;layout&#x27;</span><span class="language-javascript"> : <span class="hljs-literal">undefined</span></span>)
+      <span class="hljs-keyword">if</span> <span class="language-javascript">withToc</span>
+        <span class="hljs-name">nav</span><span class="hljs-selector-class">.toc</span>(<span class="hljs-attr">aria-label</span>=<span class="language-javascript">tx.<span class="hljs-property">toc_nav</span></span>)
+          <span class="hljs-name">ol</span>
+            <span class="hljs-keyword">each</span> section <span class="hljs-keyword">in</span> <span class="language-javascript">sections</span>
+              <span class="hljs-name">li</span>
+                <span class="hljs-name">a</span>(<span class="hljs-attr">href</span>=<span class="hljs-string">`#<span class="hljs-subst">${<span class="language-javascript"> section.<span class="hljs-property">id</span> </span>}</span>`</span>) <span class="hljs-subst">!{<span class="language-javascript"> section.<span class="hljs-property">title</span> </span>}</span>
+      <span class="hljs-selector-class">.doc</span> <span class="hljs-subst">!{<span class="language-javascript"> html </span>}</span>

@@ -1,0 +1,5 @@
+p.
+  Text in a block. The first word of each
+  continuation line is read as a tag.
+script.
+  if (window.x) run()

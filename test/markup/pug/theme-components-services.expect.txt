@@ -1,0 +1,18 @@
+<span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> services = app.<span class="hljs-property">popularContent</span>[<span class="hljs-string">&#x27;is_service_&#x27;</span> + lang]</span>
+<span class="hljs-keyword">if</span> <span class="language-javascript">(services.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>)</span>
+    <span class="hljs-name">section</span><span class="hljs-selector-id">#service</span>
+        <span class="hljs-title function_">+secTab</span>(<span class="language-javascript">tx.<span class="hljs-property">sections</span>.<span class="hljs-property">service</span>.<span class="hljs-property">tab</span>, tx.<span class="hljs-property">sections</span>.<span class="hljs-property">service</span>.<span class="hljs-property">code</span></span>)
+        <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.pad</span>
+            <span class="hljs-title function_">+headRow</span>(<span class="language-javascript">tx.<span class="hljs-property">sections</span>.<span class="hljs-property">service</span></span>)
+            <span class="hljs-selector-class">.svc</span>
+                <span class="hljs-keyword">each</span> service, i <span class="hljs-keyword">in</span> <span class="language-javascript">services</span>
+                    <span class="hljs-name">article</span><span class="hljs-selector-class">.svc-row</span>
+                        <span class="hljs-selector-class">.n</span> <span class="hljs-subst">#{<span class="language-javascript"> <span class="hljs-title class_">String</span>(i + <span class="hljs-number">1</span>).<span class="hljs-title function_">padStart</span>(<span class="hljs-number">2</span>, </span><span class="hljs-string">&#x27;0&#x27;</span><span class="language-javascript">) </span>}</span>
+                        <span class="hljs-name">h3</span> <span class="hljs-subst">#{<span class="language-javascript"> service.<span class="hljs-property">title</span> </span>}</span>
+                        <span class="hljs-keyword">if</span> <span class="language-javascript">(service.<span class="hljs-property">summary</span>)</span>
+                            <span class="hljs-name">p</span> <span class="hljs-subst">#{<span class="language-javascript"> service.<span class="hljs-property">summary</span> </span>}</span>
+                        <span class="hljs-keyword">else</span>
+                            <span class="hljs-selector-class">.svc-text</span> <span class="hljs-subst">!{<span class="language-javascript"> service.<span class="hljs-property">content</span> </span>}</span>
+                        <span class="hljs-keyword">if</span> <span class="language-javascript">(service.<span class="hljs-property">illustration</span>)</span>
+                            <span class="hljs-selector-class">.svc-media</span>
+                                <span class="hljs-name">img</span>(<span class="hljs-attr">src</span>=<span class="language-javascript">service.<span class="hljs-property">illustration</span></span>, <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;320&quot;</span>, <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;160&quot;</span>, <span class="hljs-attr">loading</span>=<span class="hljs-string">&quot;lazy&quot;</span>)

@@ -1,0 +1,3 @@
+:markdown-it
+  Some *Markdown* text
+  - a list item

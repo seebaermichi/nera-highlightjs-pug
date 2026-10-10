@@ -1,0 +1,20 @@
+extends ../layouts/layout
+
+block content
+  - const tx = app.theme.config.text[lang]
+  include ../mixins/section
+
+  main#main
+    include ../components/intro
+
+    include ../components/services
+
+    include ../components/references
+
+    include ../components/courses
+
+    include ../components/blog
+
+    include ../components/about-me
+
+    include ../components/contact

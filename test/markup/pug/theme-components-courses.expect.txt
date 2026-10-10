@@ -1,0 +1,31 @@
+<span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> courses = app.<span class="hljs-property">popularContent</span>[<span class="hljs-string">&#x27;is_course_&#x27;</span> + lang]</span>
+<span class="hljs-keyword">if</span> <span class="language-javascript">(courses.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>)</span>
+    <span class="hljs-name">section</span><span class="hljs-selector-id">#courses</span>
+        <span class="hljs-title function_">+secTab</span>(<span class="language-javascript">tx.<span class="hljs-property">sections</span>.<span class="hljs-property">courses</span>.<span class="hljs-property">tab</span>, tx.<span class="hljs-property">sections</span>.<span class="hljs-property">courses</span>.<span class="hljs-property">code</span></span>)
+        <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.pad</span>
+            <span class="hljs-title function_">+headRow</span>(<span class="language-javascript">tx.<span class="hljs-property">sections</span>.<span class="hljs-property">courses</span></span>)
+            <span class="hljs-keyword">each</span> course <span class="hljs-keyword">in</span> <span class="language-javascript">courses</span>
+                <span class="hljs-selector-class">.course</span>
+                    <span class="hljs-selector-class">.course-l</span>
+                        <span class="hljs-name">h3</span> <span class="hljs-subst">#{<span class="language-javascript"> course.<span class="hljs-property">title</span> </span>}</span>
+                        <span class="hljs-keyword">if</span> <span class="language-javascript">(course.<span class="hljs-property">summary</span>)</span>
+                            <span class="hljs-name">p</span> <span class="hljs-subst">#{<span class="language-javascript"> course.<span class="hljs-property">summary</span> </span>}</span>
+                        <span class="hljs-keyword">else</span>
+                            <span class="hljs-selector-class">.course-text</span> <span class="hljs-subst">!{<span class="language-javascript"> course.<span class="hljs-property">content</span> </span>}</span>
+                        <span class="hljs-keyword">if</span> <span class="language-javascript">(course.<span class="hljs-property">duration</span> || course.<span class="hljs-property">price</span>)</span>
+                            <span class="hljs-selector-class">.price-row</span>
+                                <span class="hljs-name">div</span>
+                                    <span class="hljs-selector-class">.k</span> <span class="hljs-subst">#{<span class="language-javascript"> tx.<span class="hljs-property">duration</span> </span>}</span>
+                                    <span class="hljs-selector-class">.n</span> <span class="hljs-subst">#{<span class="language-javascript"> course.<span class="hljs-property">duration</span> </span>}</span>
+                                <span class="hljs-name">div</span>
+                                    <span class="hljs-selector-class">.k</span> <span class="hljs-subst">#{<span class="language-javascript"> tx.<span class="hljs-property">price</span> </span>}</span>
+                                    <span class="hljs-selector-class">.n</span> <span class="hljs-subst">#{<span class="language-javascript"> course.<span class="hljs-property">price</span> </span>}</span>
+                        <span class="hljs-keyword">if</span> <span class="language-javascript">(course.<span class="hljs-property">note</span>)</span>
+                            <span class="hljs-name">p</span><span class="hljs-selector-class">.note</span> <span class="hljs-subst">#{<span class="language-javascript"> course.<span class="hljs-property">note</span> </span>}</span>
+                        <span class="hljs-name">a</span><span class="hljs-selector-class">.btn</span>(<span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#contact&quot;</span>) <span class="hljs-subst">#{<span class="language-javascript"> tx.<span class="hljs-property">more_course_info</span> </span>}</span>
+                    <span class="hljs-keyword">if</span> <span class="language-javascript">(course.<span class="hljs-property">modules</span>)</span>
+                        <span class="hljs-name">ol</span><span class="hljs-selector-class">.mods</span>
+                            <span class="hljs-keyword">each</span> module, i <span class="hljs-keyword">in</span> <span class="language-javascript">course.<span class="hljs-property">modules</span></span>
+                                <span class="hljs-name">li</span>
+                                    <span class="hljs-name">span</span><span class="hljs-selector-class">.mi</span> <span class="hljs-subst">#{<span class="language-javascript"> <span class="hljs-title class_">String</span>(i + <span class="hljs-number">1</span>).<span class="hljs-title function_">padStart</span>(<span class="hljs-number">2</span>, </span><span class="hljs-string">&#x27;0&#x27;</span><span class="language-javascript">) </span>}</span>
+                                    <span class="hljs-punctuation">|</span> <span class="hljs-subst">#{<span class="language-javascript"> <span class="hljs-variable language_">module</span> </span>}</span>

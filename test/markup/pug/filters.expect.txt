@@ -1,0 +1,4 @@
+<span class="hljs-meta">:markdown-it</span>
+  # Heading
+<span class="hljs-meta">:markdown-it</span>(<span class="hljs-attr">linkify</span>)
+<span class="hljs-meta">:uglify-js:babel</span>

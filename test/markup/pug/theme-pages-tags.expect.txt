@@ -1,0 +1,31 @@
+<span class="hljs-keyword">extends</span> <span class="hljs-string">../layouts/layout</span>
+
+<span class="hljs-keyword">block</span> content
+  <span class="hljs-operator">-</span> <span class="hljs-keyword">const</span><span class="language-javascript"> tx = app.<span class="hljs-property">theme</span>.<span class="hljs-property">config</span>.<span class="hljs-property">text</span>[lang]</span>
+  <span class="hljs-keyword">include</span> <span class="hljs-string">../mixins/section</span>
+
+  <span class="hljs-name">main</span><span class="hljs-selector-class">.page</span><span class="hljs-selector-id">#main</span>
+    <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.sec-tab</span>
+      <span class="hljs-name">span</span><span class="hljs-selector-class">.t</span> // Tags
+      <span class="hljs-name">span</span><span class="hljs-selector-class">.t</span><span class="hljs-selector-class">.mono</span> <span class="hljs-subst">#{<span class="language-javascript"> meta.<span class="hljs-property">taggedPages</span>.<span class="hljs-property">length</span> </span>}</span> posts[]
+
+    <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.head</span>
+      <span class="hljs-selector-class">.label</span> // Tag
+      <span class="hljs-name">h1</span> <span class="hljs-subst">#{<span class="language-javascript"> meta.<span class="hljs-property">title</span> </span>}</span>
+
+    <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.pad</span>
+      <span class="hljs-keyword">if</span> <span class="language-javascript">meta.<span class="hljs-property">taggedPages</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span></span>
+        <span class="hljs-selector-class">.blog-grid</span>
+          <span class="hljs-keyword">each</span> page <span class="hljs-keyword">in</span> <span class="language-javascript">meta.<span class="hljs-property">taggedPages</span></span>
+            <span class="hljs-name">a</span><span class="hljs-selector-class">.post</span>(<span class="hljs-attr">href</span>=<span class="language-javascript">page.<span class="hljs-property">meta</span>.<span class="hljs-property">href</span></span>)
+              <span class="hljs-selector-class">.media</span>
+                <span class="hljs-keyword">if</span> <span class="language-javascript">(page.<span class="hljs-property">meta</span>.<span class="hljs-property">illustration</span>)</span>
+                  <span class="hljs-name">img</span>(<span class="hljs-attr">src</span>=<span class="language-javascript">page.<span class="hljs-property">meta</span>.<span class="hljs-property">illustration</span></span>, <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;200&quot;</span>, <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;200&quot;</span>, <span class="hljs-attr">loading</span>=<span class="hljs-string">&quot;lazy&quot;</span>)
+                <span class="hljs-keyword">else if</span> <span class="language-javascript">(page.<span class="hljs-property">meta</span>.<span class="hljs-property">image</span>)</span>
+                  <span class="hljs-name">img</span>(<span class="hljs-attr">src</span>=<span class="language-javascript">page.<span class="hljs-property">meta</span>.<span class="hljs-property">image</span></span>, <span class="hljs-attr">alt</span>=<span class="language-javascript">page.<span class="hljs-property">meta</span>.<span class="hljs-property">image_alt</span></span>, <span class="hljs-attr">loading</span>=<span class="hljs-string">&quot;lazy&quot;</span>)
+              <span class="hljs-selector-class">.post-body</span>
+                <span class="hljs-name">h2</span> <span class="hljs-subst">#{<span class="language-javascript"> page.<span class="hljs-property">meta</span>.<span class="hljs-property">title</span> </span>}</span>
+                <span class="hljs-name">p</span> <span class="hljs-subst">#{<span class="language-javascript"> page.<span class="hljs-property">meta</span>.<span class="hljs-property">sub_title</span> </span>}</span>
+                <span class="hljs-name">span</span><span class="hljs-selector-class">.card-link</span>
+                  <span class="hljs-punctuation">|</span> <span class="hljs-subst">#{<span class="language-javascript"> tx.<span class="hljs-property">read_more</span> </span>}</span>&amp;nbsp;
+                  <span class="hljs-title function_">+arrow</span>

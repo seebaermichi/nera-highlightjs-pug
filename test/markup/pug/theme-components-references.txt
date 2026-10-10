@@ -1,0 +1,42 @@
+//- Sorted ascending by the `order` front matter; references without one go last.
+- const rank = (reference) => (typeof reference.order === 'number' ? reference.order : Number.MAX_SAFE_INTEGER)
+- const references = [...(app.popularContent['is_reference_' + lang] || [])].sort((a, b) => rank(a) - rank(b))
+if (references.length > 0)
+    section#references
+        +secTab(tx.sections.references.tab, tx.sections.references.code)
+        .wrap.pad
+            +headRow(tx.sections.references)
+            .ref-grid
+                each reference, i in references
+                    - const tag = reference.link ? 'a' : 'article'
+                    #{ tag }.card(href=reference.link, rel=reference.link ? 'noopener noreferrer' : undefined)
+                        .media
+                            //- `<name>-1440.webp` comes with 720/1080px variants and AVIF siblings.
+                            - const variants = reference.image && reference.image.match(/^(.+)-1440\.webp$/)
+                            if (variants)
+                                - const base = variants[1]
+                                - const srcset = (ext) => [720, 1080, 1440].map((w) => `${base}-${w}.${ext} ${w}w`).join(', ')
+                                - const sizes = '(max-width: 920px) calc(100vw - 56px), (max-width: 1180px) 50vw, 420px'
+                                picture
+                                    source(type="image/avif", srcset=srcset('avif'), sizes=sizes)
+                                    img(src=reference.image, srcset=srcset('webp'), sizes=sizes, alt=reference.image_alt, width="1440", height="881", loading="lazy", decoding="async")
+                            else if (reference.image)
+                                img(src=reference.image, alt=reference.image_alt, width="734", height="475", loading="lazy")
+                            else
+                                span.ph screenshot
+                        .card-body
+                            if (reference.kind)
+                                span.kind(class=reference.kind) #{ tx.sections.references.kinds[reference.kind] }
+                            .card-head
+                                h3 #{ reference.short_title || reference.title }
+                                span.idx #{ String(i + 1).padStart(2, '0') }
+                            if (reference.summary)
+                                p #{ reference.summary }
+                            else
+                                .card-text !{ reference.content }
+                            if (reference.tech)
+                                .tech #{ reference.tech }
+                            if (reference.url)
+                                span.card-link
+                                    | #{ reference.url }&nbsp;
+                                    +arrow

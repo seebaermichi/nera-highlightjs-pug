@@ -1,0 +1,10 @@
+<span class="hljs-name">section</span><span class="hljs-selector-id">#about-me</span>
+    <span class="hljs-title function_">+secTab</span>(<span class="language-javascript">tx.<span class="hljs-property">sections</span>.<span class="hljs-property">about</span>.<span class="hljs-property">tab</span>, tx.<span class="hljs-property">sections</span>.<span class="hljs-property">about</span>.<span class="hljs-property">code</span></span>)
+    <span class="hljs-selector-class">.wrap</span><span class="hljs-selector-class">.pad</span>
+        <span class="hljs-selector-class">.about</span>
+            <span class="hljs-selector-class">.about-l</span>
+                <span class="hljs-selector-class">.about-media</span>
+                    <span class="hljs-name">img</span>(<span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/illu/06-ueber-mich.svg&quot;</span>, <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;300&quot;</span>, <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;300&quot;</span>, <span class="hljs-attr">loading</span>=<span class="hljs-string">&quot;lazy&quot;</span>)
+            <span class="hljs-selector-class">.about-r</span>
+                <span class="hljs-punctuation">|</span> <span class="hljs-subst">!{<span class="language-javascript"> app.<span class="hljs-property">stacks</span>[</span><span class="hljs-string">&#x27;about_me_&#x27;</span><span class="language-javascript"> + lang].<span class="hljs-property">content</span> </span>}</span>
+                <span class="hljs-selector-class">.sig</span> <span class="hljs-subst">#{<span class="language-javascript"> tx.<span class="hljs-property">signature</span> </span>}</span>
