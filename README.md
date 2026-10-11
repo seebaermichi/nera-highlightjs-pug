@@ -1,5 +1,8 @@
 # @nera-static/highlightjs-pug
 
+[![Test](https://github.com/seebaermichi/nera-highlightjs-pug/actions/workflows/test.yml/badge.svg)](https://github.com/seebaermichi/nera-highlightjs-pug/actions/workflows/test.yml)
+[![npm version](https://img.shields.io/npm/v/@nera-static/highlightjs-pug)](https://www.npmjs.com/package/@nera-static/highlightjs-pug)
+
 A [Pug](https://pugjs.org) (formerly Jade) grammar for [highlight.js](https://highlightjs.org) 11. It highlights tags, classes and ids, attributes with JavaScript values, keywords, mixins, interpolation and comments, using highlight.js's standard scopes, so every highlight.js theme colors it without extra CSS.
 
 ```pug
